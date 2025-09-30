@@ -3,19 +3,36 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --shade: #f1f1f1;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --shade: #303030;
+  }
+}
+
+@layer utilities {
+  .glass-effect {
+    @apply backdrop-blur-2xl;
+
+    &::before {
+      content: "";
+      @apply absolute inset-0 z-[-1];
+      @apply bg-background/40;
+      /* @apply rounded-2xl; */
+    }
+  }
+
+  .momentum-scroll {
+    -webkit-overflow-scrolling: touch;
   }
 }
 

@@ -1,103 +1,179 @@
-import Image from "next/image";
+'use client';
+
+import Link from "next/link";
+
+import { useInView } from "@/app/hooks/useInView";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [heroInViewRef, heroInView] = useInView({threshold: 0.4});
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+  return (
+    <div className="bg-background p-2 md:p-6">
+      <div className="border-2 border-foreground rounded-2xl overflow-clip">
+        
+        <main>
+          
+          <section ref={heroInViewRef} id="hero" className="min-h-[60vh] md:min-h-[80vh] scroll-mt-2 md:scroll-mt-6 flex flex-col justify-center items-center px-6 md:px-12 py-12">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-center mb-6">
+              Noah Pfister.
+            </h1>
+            <p className="text-lg md:text-xl text-center max-w-2xl text-muted-foreground">
+              Hi, I'm Noah. I'm driven by a fascination for how things work — and how to make them work{" "}
+              <span className="
+                bg-gradient-to-r from-cyan-400 to-blue-500
+                bg-clip-text
+                text-transparent
+              ">
+                better
+              </span>
+              .
+            </p>
+          </section>
+
+          <section id="projects" className="px-6 md:px-12 py-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8">Projects</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="border border-foreground/20 rounded-xl p-6">
+                <h3 className="text-xl font-semibold mb-3">This site</h3>
+                <p className="text-muted-foreground mb-4">
+                  A portfolio designed and built from scratch to showcase my process in one place.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm">React</span>
+                  <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm">Next.js</span>
+                  <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm">Tailwind</span>
+                </div>
+              </div>
+              <div className="border border-foreground/20 rounded-xl p-6">
+                <h3 className="text-xl font-semibold mb-3">Dev & Design of Industrial Printhead-Cleaning Software</h3>
+                <p className="text-muted-foreground mb-4">
+                  Made to be functional and intuitive in industrial environments.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm">TypeScript</span>
+                  <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm">Node.js</span>
+                  <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm">API</span>
+                </div>
+              </div>
+              <div className="border border-foreground/20 rounded-xl p-6">
+                <h3 className="text-xl font-semibold mb-3">Personal Finance Management WebTool</h3>
+                <p className="text-muted-foreground mb-4">
+                  To visualize, track and plan spending, from the moment this month’s paycheck rolls in.                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm">React Native</span>
+                  <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm">Firebase</span>
+                </div>
+              </div>
+              <div className="border border-foreground/20 rounded-xl p-6">
+                <h3 className="text-xl font-semibold mb-3">AI-Driven Daily Fitness Newsletter</h3>
+                <p className="text-muted-foreground mb-4">
+                  Get the most recent fitness news from multiple credible sources, condensed into a 5-minute read, right into your daily inbox.                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm">D3.js</span>
+                  <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm">Charts</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="skills" className="px-6 md:px-12 py-16 bg-foreground/5">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8">Skills</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div>
+                <h3 className="text-xl font-semibold mb-4">Frontend</h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li>React & Next.js</li>
+                  <li>TypeScript</li>
+                  <li>Tailwind CSS</li>
+                  <li>Responsive Design</li>
+                  <li>UI/UX Principles</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold mb-4">Backend</h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li>Node.js</li>
+                  <li>API Development</li>
+                  <li>Database Design</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold mb-4">Tools</h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li>Git & GitHub</li>
+                  <li>Docker</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section id="about" className="px-6 md:px-12 py-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8">About Me</h2>
+            <div className="max-w-3xl">
+              <p className="text-lg text-muted-foreground mb-6">
+                I'm Noah.
+              </p>
+              <p className="text-lg text-muted-foreground mb-6">
+                My journey.
+              </p>
+              <p className="text-lg text-muted-foreground">
+                Other shit.
+              </p>
+            </div>
+          </section>
+
+          <section id="contact" className="px-6 md:px-12 py-16 bg-foreground/5">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8">Get In Touch</h2>
+            <div className="max-w-2xl">
+              <p className="text-lg text-muted-foreground mb-8">
+                Interested in working together? I'd love to hear from you.
+              </p>
+              <div className="space-y-4">
+                {/* <div className="flex items-center gap-3">
+                  <span className="font-semibold">Email:</span>
+                  <span className="text-muted-foreground">noah.pfister@outlook.com</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="font-semibold">Location:</span>
+                  <span className="text-muted-foreground">Available worldwide</span>
+                </div> */}
+                <span>Contact form</span>
+              </div>
+            </div>
+          </section>
+
+          <div className="flex flex-col justify-center items-center py-4">
+            <span>© Noah Pfister</span>
+          </div>
+
+        </main>
+
+        <Footer showFooter={!heroInView}/>
+
+      </div>
     </div>
   );
 }
+
+function Footer({ showFooter }: Readonly<{
+  showFooter: boolean;
+}>) {
+  return (
+    <footer className="sticky bottom-0">
+      <div className={`
+        border-t-2 border-foreground glass-effect
+        transition-opacity duration-300
+        ${showFooter ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+      `}>
+        <nav className="flex justify-around items-center py-2 px-2 md:py-2 md:px-48 lg:text-2xl">
+          <Link href="#hero" className="hover:underline">Top</Link>
+          <Link href="#projects" className="hover:underline">Projects</Link>
+          <Link href="#skills" className="hover:underline">Skills</Link>
+          <Link href="#about" className="hover:underline">About</Link>
+          <Link href="#contact" className="hover:underline">Contact</Link>
+        </nav>
+      </div>
+    </footer>
+  );
+}
+
