@@ -6,10 +6,18 @@ type UseInViewOptions = IntersectionObserverInit & {
   triggerOnce?: boolean;
 };
 
-export function useInView(options: UseInViewOptions = {}): [RefObject<any>, boolean] {
-  const { triggerOnce = false, ...observerOptions } = options;
+export function useInView<T extends HTMLElement>(
+  options: UseInViewOptions = {}
+): [RefObject<T | null>, boolean] {
+  const { 
+    triggerOnce = false, 
+    root, 
+    rootMargin, 
+    threshold = 0.1
+  } = options;
+
   const [isInView, setIsInView] = useState(false);
-  const ref = useRef<Element>(null);
+  const ref = useRef<T>(null);
 
   useEffect(() => {
     const currentRef = ref.current;
@@ -29,14 +37,15 @@ export function useInView(options: UseInViewOptions = {}): [RefObject<any>, bool
           }
         }
       },
-      {
-        threshold: 0.1,
-        ...observerOptions,
-      }
+      { root, rootMargin, threshold }
     );
 
     observer.observe(currentRef);
-    return () => observer.disconnect();
-  }, [options]);
+
+    return () => {
+      observer.unobserve(currentRef);
+    };
+  }, [triggerOnce, root, rootMargin, threshold]);
+
   return [ref, isInView];
-};
+}

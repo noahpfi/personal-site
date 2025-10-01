@@ -21,7 +21,7 @@ function Reveal({ children, delay, threshold=0.4, notOnce=false }: Readonly<{
   threshold?: number;
   notOnce?: boolean;
 }>) {
-  const [inViewRef, inView] = useInView({threshold: threshold, triggerOnce: !notOnce});
+  const [inViewRef, inView] = useInView<HTMLDivElement>({threshold: threshold, triggerOnce: !notOnce});
   return (
     <div ref={inViewRef} className={`
       transition duration-400 animate-reveal
@@ -33,7 +33,7 @@ function Reveal({ children, delay, threshold=0.4, notOnce=false }: Readonly<{
 }
 
 export default function Home() {
-  const [heroInViewRef, heroInView] = useInView({threshold: 0.4});
+  const [heroInViewRef, heroInView] = useInView<HTMLElement>({threshold: 0.4});
 
   return (
     <div className="bg-background p-2 md:p-6">
@@ -45,7 +45,7 @@ export default function Home() {
             <SpinningHero/>
             <Reveal notOnce>
               <p className="text-lg md:text-xl text-center max-w-2xl text-muted-foreground">
-                Hi, I'm Noah. I'm driven by a fascination for how things work — and how to make them work{" "}
+                Hi, I'm Noah. I'm driven by a fascination for how things work — and how to make them work 
                 <span className="italic">
                   better
                 </span>
