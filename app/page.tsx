@@ -15,12 +15,13 @@ import about_love from "@/public/about/love.jpg";
 import about_personalProject from "@/public/about/personal_project.jpg";
 import about_studio from "@/public/about/studio.jpg";
 
-function Reveal({ children, delay, notOnce=false }: Readonly<{
+function Reveal({ children, delay, threshold=0.4, notOnce=false }: Readonly<{
   children: React.ReactNode;
-  delay?: string
-  notOnce?: boolean
+  delay?: string;
+  threshold?: number;
+  notOnce?: boolean;
 }>) {
-  const [inViewRef, inView] = useInView({threshold: 0.4, triggerOnce: !notOnce});
+  const [inViewRef, inView] = useInView({threshold: threshold, triggerOnce: !notOnce});
   return (
     <div ref={inViewRef} className={`
       transition duration-400 animate-reveal
@@ -56,14 +57,14 @@ export default function Home() {
           <section id="projects" className="px-6 md:px-12 pt-16 pb-24">
             <h2 className="text-3xl md:text-4xl font-bold mb-8">Projects</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Reveal delay="0" notOnce>
+              <Reveal delay="200ms" threshold={0.1} notOnce>
                 <ProjectCard
                   title="This site"
                   description="A portfolio designed and built from scratch to showcase my process in one place."
                   stats={["Next.js", "React", "Tailwind"]}
                 />
               </Reveal>
-              <Reveal delay="100ms" notOnce>
+              <Reveal delay="200ms" threshold={0.1} notOnce>
               <ProjectCard
                 title="Dev & Design of Industrial Printhead-Cleaning Software"
                 description="Made to be functional and intuitive in industrial environments."
@@ -286,8 +287,8 @@ function SkillsSection() {
               {skills.map((skill, i) => {
                 const isOpen = openSkill === skill.name;
                 return (
-                  <Reveal delay={`${i * 20 + 50}ms`} notOnce>
-                    <li key={skill.name}>
+                  <Reveal delay={`${i * 20 + 50}ms`} notOnce key={skill.name}>
+                    <li>
                       <div
                         className="flex gap-2 items-center cursor-pointer hover:bg-foreground/10 hover:underline underline-offset-4 rounded-xl py-1.5 px-2 -my-1.5 -mx-2"
                         onClick={() => handleSkillClick(skill.name)}
@@ -597,8 +598,8 @@ function AboutMeSection() {
         {aboutData.map((item, i) => {
           const isOpen = openSection === item.trigger;
           return (
-            <Reveal delay={`${i * 20 + 50}ms`} notOnce>
-              <div key={item.trigger}>
+            <Reveal delay={`${i * 20 + 50}ms`} notOnce key={item.trigger}>
+              <div>
                 <div
                   className="flex justify-between items-center cursor-pointer hover:bg-foreground/5 hover:underline underline-offset-4 rounded-lg p-2 -m-2"
                   onClick={() => handleSectionClick(item.trigger)}
