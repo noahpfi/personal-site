@@ -15,28 +15,19 @@ import about_love from "@/public/about/love.jpg";
 import about_personalProject from "@/public/about/personal_project.jpg";
 import about_studio from "@/public/about/studio.jpg";
 
-
-const MAX_NUMBER_OF_ELEMENTS = 12;
-
-function SpinningHero() {
-  const elements = Array.from({ length: MAX_NUMBER_OF_ELEMENTS });
-
+function Reveal({ children, delay, notOnce=false }: Readonly<{
+  children: React.ReactNode;
+  delay?: string
+  notOnce?: boolean
+}>) {
+  const [inViewRef, inView] = useInView({threshold: 0.4, triggerOnce: !notOnce});
   return (
-    <section id="hero" className="flex flex-col justify-center items-center overflow-hidden">
-      <div className="spinning-text-container">
-        <div className="spinning-text-world">
-          {elements.map((_, i) => (
-            <div
-              key={i}
-              className="spinning-text-element text-5xl md:text-6xl lg:text-7xl font-bold"
-              style={{ '--i': i } as React.CSSProperties}
-            >
-              {"NP"}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+    <div ref={inViewRef} className={`
+      transition duration-400 animate-reveal
+      ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-0.5 pointer-events-none"}
+    `} style={{transitionDelay: delay || "300ms"}}>
+      {children}
+    </div>
   );
 }
 
@@ -50,39 +41,36 @@ export default function Home() {
         <main>
           
           <section ref={heroInViewRef} id="hero" className="min-h-[60vh] md:min-h-[80vh] scroll-mt-2 md:scroll-mt-6 flex flex-col justify-center items-center px-6 md:px-12">
-            {/* <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-6">
-              NP
-            </h1> */}
             <SpinningHero/>
-            <p className="text-lg md:text-xl text-center max-w-2xl text-muted-foreground">
-              Hi, I'm Noah. I'm driven by a fascination for how things work — and how to make them work{" "}
-              {/* <span className="
-                bg-gradient-to-r from-cyan-400 to-blue-500
-                bg-clip-text
-                text-transparent
-              ">
-                better
-              </span> */}
-              <span className="italic">
-                better
-              </span>
-              .
-            </p>
+            <Reveal notOnce>
+              <p className="text-lg md:text-xl text-center max-w-2xl text-muted-foreground">
+                Hi, I'm Noah. I'm driven by a fascination for how things work — and how to make them work{" "}
+                <span className="italic">
+                  better
+                </span>
+                .
+              </p>
+            </Reveal>
           </section>
 
           <section id="projects" className="px-6 md:px-12 pt-16 pb-24">
             <h2 className="text-3xl md:text-4xl font-bold mb-8">Projects</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <ProjectCard
-                title="This site"
-                description="A portfolio designed and built from scratch to showcase my process in one place."
-                stats={["Next.js", "React", "Tailwind"]}
-              />
+              <Reveal delay="0" notOnce>
+                <ProjectCard
+                  title="This site"
+                  description="A portfolio designed and built from scratch to showcase my process in one place."
+                  stats={["Next.js", "React", "Tailwind"]}
+                />
+              </Reveal>
+              <Reveal delay="100ms" notOnce>
               <ProjectCard
                 title="Dev & Design of Industrial Printhead-Cleaning Software"
                 description="Made to be functional and intuitive in industrial environments."
                 stats={["Raspberry Pi", "Python", "Kivy", "API"]}
               />
+              </Reveal>
+              <Reveal delay="100ms" notOnce>
               <ProjectCard
                 title="Logo design for industrial plotting robot"
                 stats={["Affinity Suite"]}
@@ -94,24 +82,31 @@ export default function Home() {
                   />
                 )}
               />
+              </Reveal>
+              <Reveal delay="100ms" notOnce>
               <ProjectCard
                 title="Calendar/Timetable optimization WebTool"
                 description="Visualize event overlaps and find optimal combinations based on several user preferences."
                 stats={["Next.js", "React", "SQLite", "API", "NP Optimization"]}
                 status="In Dev"
               />
+              </Reveal>
+              <Reveal delay="0" notOnce>
               <ProjectCard
                 title="Personal Finance Management Tool"
                 description="To visualize, track and plan spending, from the moment this month’s paycheck rolls in."
                 stats={["Flutter", "SQLite"]}
                 status="To Come"
               />
+              </Reveal>
+              <Reveal delay="100ms" notOnce>
               <ProjectCard
                 title="AI-Driven Daily Fitness Newsletter"
                 description="Get the most recent fitness news from multiple credible sources, condensed into a 5-minute read, right into your daily inbox."
                 stats={["n8n", "Docker"]}
                 status="To Come"
               />
+              </Reveal>
             </div>
           </section>
 
@@ -140,7 +135,9 @@ export default function Home() {
           </section>
 
           <div className="flex flex-col justify-center items-center bg-foreground/5 pt-16 md:pt-24 pb-4">
-            <span className="text-xs md:text-base">© Noah Pfister</span>
+            <Reveal>
+              <span className="text-xs md:text-base">© Noah Pfister</span>
+            </Reveal>
           </div>
 
         </main>
@@ -149,6 +146,30 @@ export default function Home() {
 
       </div>
     </div>
+  );
+}
+
+const MAX_NUMBER_OF_ELEMENTS = 12;
+
+function SpinningHero() {
+  const elements = Array.from({ length: MAX_NUMBER_OF_ELEMENTS });
+
+  return (
+    <section id="hero" className="flex flex-col justify-center items-center overflow-hidden">
+      <div className="spinning-text-container">
+        <div className="spinning-text-world">
+          {elements.map((_, i) => (
+            <div
+              key={i}
+              className="spinning-text-element text-5xl md:text-6xl lg:text-7xl font-bold"
+              style={{ '--i': i } as React.CSSProperties}
+            >
+              {"NP"}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -187,33 +208,35 @@ function SkillsSection() {
           <div key={category}>
             <h3 className="text-xl font-semibold mb-4">{category}</h3>
             <ul className="space-y-2 text-muted-foreground">
-              {skills.map((skill) => {
+              {skills.map((skill, i) => {
                 const isOpen = openSkill === skill.name;
                 return (
-                  <li key={skill.name}>
-                    <div
-                      className="flex gap-2 items-center cursor-pointer hover:bg-foreground/10 hover:underline underline-offset-4 rounded-xl py-1.5 px-2 -my-1.5 -mx-2"
-                      onClick={() => handleSkillClick(skill.name)}
-                    >
-                      <p>{skill.name}</p>
-                      <span className={`md:hidden text-muted-foreground/70 transition-transform duration-300 ${isOpen ? '-rotate-270' : ''}`}>
-                        {">"}
-                        {/* › */}
-                      </span>
-                    </div>
-                    <div
-                      className={`
-                        grid overflow-hidden transition-all duration-300 ease-in-out
-                        ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}
-                      `}
-                    >
-                      <div className="overflow-hidden">
-                         <div className="mt-3 p-3 bg-foreground/10 text-sm rounded-lg">
-                           {skill.description}
-                         </div>
+                  <Reveal delay={`${i * 20 + 50}ms`} notOnce>
+                    <li key={skill.name}>
+                      <div
+                        className="flex gap-2 items-center cursor-pointer hover:bg-foreground/10 hover:underline underline-offset-4 rounded-xl py-1.5 px-2 -my-1.5 -mx-2"
+                        onClick={() => handleSkillClick(skill.name)}
+                      >
+                        <p>{skill.name}</p>
+                        <span className={`md:hidden delay- text-muted-foreground/70 transition-transform duration-300 ${isOpen ? '-rotate-270' : ''}`}>
+                          {">"}
+                          {/* › */}
+                        </span>
                       </div>
-                    </div>
-                  </li>
+                      <div
+                        className={`
+                          grid overflow-hidden transition-all duration-300 ease-in-out
+                          ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}
+                        `}
+                      >
+                        <div className="overflow-hidden">
+                          <div className="mt-3 p-3 bg-foreground/10 text-sm rounded-lg">
+                            {skill.description}
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </Reveal>
                 );
               })}
             </ul>
@@ -465,20 +488,6 @@ const aboutData = [
   },
   {
     trigger: "Other shit.", // renamed for clarity
-    // content: (
-    //   <div className="space-y-4">
-    //     <div className="flex h-[40vh] gap-4 overflow-x-auto">
-    //       {aboutImages.map((image, index) => (
-    //         <Image
-    //           key={index}
-    //           src={image.src}
-    //           alt={image.alt}
-    //           className="h-full w-auto rounded-md"
-    //         />
-    //       ))}
-    //     </div>
-    //   </div>
-    // ),
     content: (
       <div className="space-y-4">
         <p>The 'art'</p>
@@ -495,32 +504,6 @@ const aboutData = [
         {/* <p>Aasdasd</p> */}
       </div>
     ),
-    // content: (
-    //   <div className="space-y-4">
-    //     <div className="flex h-[40vh] gap-4 overflow-x-auto">
-    //       {aboutImages.map((image, index) => (
-    //         <div key={index} className="relative group flex-shrink-0">
-    //           <Image
-    //             src={image.src}
-    //             alt={image.alt}
-    //             className="h-full w-auto rounded-md"
-    //           />
-    //           <div 
-    //             className="
-    //               absolute inset-0 flex items-end justify-center p-4
-    //               opacity-0 group-hover:opacity-100 
-    //               transition-opacity duration-300
-    //             "
-    //           >
-    //             <p className="text-background text-center text-sm py-2 px-4 rounded-full bg-foreground/50">
-    //               {image.alt}
-    //             </p>
-    //           </div>
-    //         </div>
-    //       ))}
-    //     </div>
-    //   </div>
-    // ),
   },
 ];
 
@@ -536,33 +519,35 @@ function AboutMeSection() {
     <section id="about" className="px-6 md:px-12 py-24">
       <h2 className="text-3xl md:text-4xl font-bold mb-8">About Me</h2>
       <div className="space-y-4">
-        {aboutData.map((item) => {
+        {aboutData.map((item, i) => {
           const isOpen = openSection === item.trigger;
           return (
-            <div key={item.trigger}>
-              <div
-                className="flex justify-between items-center cursor-pointer hover:bg-foreground/5 hover:underline underline-offset-4 rounded-lg p-2 -m-2"
-                onClick={() => handleSectionClick(item.trigger)}
-              >
-                <p className="text-lg text-muted-foreground">{item.trigger}</p>
-                <span className={`md:hidden text-muted-foreground/70 transition-transform duration-300 ${isOpen ? '-rotate-270' : ''}`}>
-                  {">"}
-                </span>
-              </div>
-              
-              <div
-                className={`
-                  grid overflow-hidden transition-all duration-300 ease-in-out
-                  ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}
-                `}
-              >
-                <div className="overflow-hidden">
-                  <div className="mt-4 p-4 bg-foreground/5 rounded-lg text-muted-foreground">
-                    {item.content}
+            <Reveal delay={`${i * 20 + 50}ms`} notOnce>
+              <div key={item.trigger}>
+                <div
+                  className="flex justify-between items-center cursor-pointer hover:bg-foreground/5 hover:underline underline-offset-4 rounded-lg p-2 -m-2"
+                  onClick={() => handleSectionClick(item.trigger)}
+                >
+                  <p className="text-lg text-muted-foreground">{item.trigger}</p>
+                  <span className={`md:hidden text-muted-foreground/70 transition-transform duration-300 ${isOpen ? '-rotate-270' : ''}`}>
+                    {">"}
+                  </span>
+                </div>
+                
+                <div
+                  className={`
+                    grid overflow-hidden transition-all duration-300 ease-in-out
+                    ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}
+                  `}
+                >
+                  <div className="overflow-hidden">
+                    <div className="mt-4 p-4 bg-foreground/5 rounded-lg text-muted-foreground">
+                      {item.content}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
           );
         })}
       </div>
@@ -631,16 +616,18 @@ function ContactForm() {
           "
         />
       </div>
-      <button
-        type="submit" 
-        className="
-          self-start
-          mt-4 text-xl font-semibold text-left 
-          hover:underline underline-offset-4
-        "
-      >
-        {status}
-      </button>
+      <Reveal>
+        <button
+          type="submit" 
+          className="
+            self-start
+            mt-4 text-xl font-semibold text-left 
+            hover:underline underline-offset-4
+          "
+        >
+          {status}
+        </button>
+      </Reveal>
     </form>
   );
 }
