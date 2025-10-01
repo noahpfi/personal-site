@@ -7,7 +7,8 @@ import Image from "next/image";
 import { useInView } from "@/app/hooks/useInView";
 import { sendEmail } from "@/app/actions";
 
-import projects_layro from "@/public/projects/logo_farbe_hintergrund_transparent.svg";
+import projects_layro_light from "@/public/projects/logo_farbe_hintergrund_transparent.svg";
+import projects_layro_dark from "@/public/projects/logo_weiß_hintergrund_transparent.svg";
 import about_delight from "@/public/about/delight.jpg";
 import about_sole from "@/public/about/sole.jpg";
 import about_blank from "@/public/about/__.jpg";
@@ -76,11 +77,20 @@ export default function Home() {
                 title="Logo design for industrial plotting robot"
                 stats={["Affinity Suite"]}
                 images={(
-                  <Image
-                    src={projects_layro}
-                    alt="Logo LAYRO"
-                    objectFit="contain"
-                  />
+                  <>
+                    <Image
+                      src={projects_layro_light}
+                      alt="Logo LAYRO"
+                      objectFit="contain"
+                      className="dark:hidden"
+                    />
+                    <Image
+                      src={projects_layro_dark}
+                      alt="Logo LAYRO"
+                      objectFit="contain"
+                      className="not-dark:hidden opactiy-95"
+                    />
+                  </>
                 )}
               />
               </Reveal>
