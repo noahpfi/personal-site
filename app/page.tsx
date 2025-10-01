@@ -45,9 +45,9 @@ export default function Home() {
             <SpinningHero/>
             <Reveal notOnce>
               <p className="text-lg md:text-xl text-center max-w-2xl text-muted-foreground">
-                Hi, I'm Noah. I'm driven by a fascination for how things work — and how to make them work 
+                Hi, I'm Noah. I'm driven by a fascination for how things work — and how to make them work
                 <span className="italic">
-                  better
+                  {" "}better
                 </span>
                 .
               </p>
