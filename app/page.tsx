@@ -7,7 +7,38 @@ import Image from "next/image";
 import { useInView } from "@/app/hooks/useInView";
 import { sendEmail } from "@/app/actions";
 
-import layro from "@/public/projects/logo_farbe_hintergrund_transparent.svg"; 
+import projects_layro from "@/public/projects/logo_farbe_hintergrund_transparent.svg";
+import about_delight from "@/public/about/delight.jpg";
+import about_sole from "@/public/about/sole.jpg";
+import about_blank from "@/public/about/__.jpg";
+import about_love from "@/public/about/love.jpg";
+import about_personalProject from "@/public/about/personal_project.jpg";
+import about_studio from "@/public/about/studio.jpg";
+
+
+const MAX_NUMBER_OF_ELEMENTS = 12;
+
+function SpinningHero() {
+  const elements = Array.from({ length: MAX_NUMBER_OF_ELEMENTS });
+
+  return (
+    <section id="hero" className="flex flex-col justify-center items-center overflow-hidden">
+      <div className="spinning-text-container">
+        <div className="spinning-text-world">
+          {elements.map((_, i) => (
+            <div
+              key={i}
+              className="spinning-text-element text-5xl md:text-6xl lg:text-7xl font-bold"
+              style={{ '--i': i } as React.CSSProperties}
+            >
+              {"NP"}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function Home() {
   const [heroInViewRef, heroInView] = useInView({threshold: 0.4});
@@ -19,9 +50,10 @@ export default function Home() {
         <main>
           
           <section ref={heroInViewRef} id="hero" className="min-h-[60vh] md:min-h-[80vh] scroll-mt-2 md:scroll-mt-6 flex flex-col justify-center items-center px-6 md:px-12">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-6">
+            {/* <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-6">
               NP
-            </h1>
+            </h1> */}
+            <SpinningHero/>
             <p className="text-lg md:text-xl text-center max-w-2xl text-muted-foreground">
               Hi, I'm Noah. I'm driven by a fascination for how things work — and how to make them work{" "}
               {/* <span className="
@@ -56,7 +88,7 @@ export default function Home() {
                 stats={["Affinity Suite"]}
                 images={(
                   <Image
-                    src={layro}
+                    src={projects_layro}
                     alt="Logo LAYRO"
                     objectFit="contain"
                   />
@@ -85,20 +117,7 @@ export default function Home() {
 
           <SkillsSection/>
 
-          <section id="about" className="px-6 md:px-12 py-24">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">About Me</h2>
-            <div className="max-w-3xl">
-              <p className="text-lg text-muted-foreground mb-6">
-                I'm Noah.
-              </p>
-              <p className="text-lg text-muted-foreground mb-6">
-                My journey.
-              </p>
-              <p className="text-lg text-muted-foreground">
-                Other shit.
-              </p>
-            </div>
-          </section>
+          <AboutMeSection/>
 
           <section id="contact" className="px-6 md:px-12 py-24 bg-foreground/5">
             <h2 className="text-3xl md:text-4xl font-bold mb-8">Get In Touch</h2>
@@ -120,7 +139,7 @@ export default function Home() {
             </div>
           </section>
 
-          <div className="flex flex-col justify-center items-center bg-foreground/5 pt-24 pb-4">
+          <div className="flex flex-col justify-center items-center bg-foreground/5 pt-16 md:pt-24 pb-4">
             <span className="text-xs md:text-base">© Noah Pfister</span>
           </div>
 
@@ -173,12 +192,13 @@ function SkillsSection() {
                 return (
                   <li key={skill.name}>
                     <div
-                      className="flex gap-2 items-center cursor-pointer hover:underline underline-offset-4"
+                      className="flex gap-2 items-center cursor-pointer hover:bg-foreground/10 hover:underline underline-offset-4 rounded-xl py-1.5 px-2 -my-1.5 -mx-2"
                       onClick={() => handleSkillClick(skill.name)}
                     >
                       <p>{skill.name}</p>
                       <span className={`md:hidden text-muted-foreground/70 transition-transform duration-300 ${isOpen ? '-rotate-270' : ''}`}>
                         {">"}
+                        {/* › */}
                       </span>
                     </div>
                     <div
@@ -188,7 +208,7 @@ function SkillsSection() {
                       `}
                     >
                       <div className="overflow-hidden">
-                         <div className="mt-2 p-3 bg-foreground/10 text-sm rounded-lg">
+                         <div className="mt-3 p-3 bg-foreground/10 text-sm rounded-lg">
                            {skill.description}
                          </div>
                       </div>
@@ -355,7 +375,200 @@ function ProjectCard({ title, description, stats, status, images }: Readonly<{
   );
 }
 
+const ROLES = [
+  'Developer', 'Designer', 'Photographer', 
+  'Musician', 'Producer', 'Athlete'
+];
 
+const BASE_HUES = [0, 30, 55, 175, 200, 240];
+
+const generateColorPalette = (count: number): string[] => {
+  const palette: string[] = [];
+
+  // 1. Create a shuffled copy of the base hues to ensure variety on each load.
+  const shuffledHues = [...BASE_HUES].sort(() => 0.5 - Math.random());
+
+  for (let i = 0; i < count; i++) {
+    // 2. Pick a hue, looping back if we run out of unique base hues.
+    const hue = shuffledHues[i % shuffledHues.length];
+
+    // 3. Adjust Saturation and Lightness for the "less intense" feel
+    const saturation = 75; // % - Lower for more desaturation.
+    const lightness = 60;  // % - Lower for darker, higher for lighter.
+
+    // 4. Generate the HSL color string.
+    // CSS variables will be used for light/dark mode adaptation.
+    // The browser will compute the final color based on the CSS variable values.
+    const color = `hsl(${hue}, ${saturation}%, var(--role-text-lightness, ${lightness}%))`;
+    
+    palette.push(color);
+  }
+  return palette;
+};
+
+const colorPalette = generateColorPalette(ROLES.length);
+
+const aboutImages = [
+  { src: about_delight, alt: "delight." },
+  { src: about_blank, alt: "__" },
+  { src: about_sole, alt: "sole." },
+  { src: about_personalProject, alt: "personal project." },
+  { src: about_studio, alt: "studio." },
+  { src: about_love, alt: "love." },
+];
+
+const aboutData = [
+  {
+    trigger: "I'm Noah.",
+    content: (
+      <div className="space-y-4">
+        <p>I don't know what you could describe me as. 'multi-faceted'? sounds stupid, but ig that gets it pretty close.</p>
+        <p className="text-2xl font-medium pl-2 pt-16 md:pt-8 pb-8">
+          By heart,
+          <br/>
+          <span>
+            {ROLES.map((role, i) => (
+              <React.Fragment key={role}>
+                <span style={{ color: colorPalette[i] }}>{role},</span>
+                <br/>
+              </React.Fragment>
+            ))}
+            Dreamer.
+          </span>
+        </p>
+      </div>
+    ),
+  },
+  {
+    trigger: "The journey.",
+    content: (
+      <div className="space-y-4">
+        <p>
+          My technical school background taught me the logic of
+          <span className="italic"> 'how' </span>
+          — how gears turn, how circuits connect. Computer science was the natural next step, translating that 'how' into the digital realm. But I’m the kind of person who gets restless with just knowing how.
+        </p>
+        <p>It led to a pretty stupid realization: the most brilliant engineering is a complete waste of time if it's solving the wrong problem.</p>
+        <p>
+          That's what pulled me towards the question of
+          <span className="italic"> 'why' </span>
+          . Why this product? Why would anyone care? That's why I'm now pairing my technical skills with business and economics.
+          My goal is to answer the
+          <span className="italic"> why </span>
+          before we get lost in the
+          <span className="italic"> how </span>
+          , so I can actually use my technical skills to help build the right things.
+        </p>
+        {/* <p>- NP</p> */}
+      </div>
+    ),
+  },
+  {
+    trigger: "Other shit.", // renamed for clarity
+    // content: (
+    //   <div className="space-y-4">
+    //     <div className="flex h-[40vh] gap-4 overflow-x-auto">
+    //       {aboutImages.map((image, index) => (
+    //         <Image
+    //           key={index}
+    //           src={image.src}
+    //           alt={image.alt}
+    //           className="h-full w-auto rounded-md"
+    //         />
+    //       ))}
+    //     </div>
+    //   </div>
+    // ),
+    content: (
+      <div className="space-y-4">
+        <p>The 'art'</p>
+        <div className="flex h-[40vh] gap-4 overflow-x-auto">
+          {aboutImages.map((image, index) => (
+            <Image
+              key={index}
+              src={image.src}
+              alt={image.alt}
+              className="h-full w-auto rounded-md"
+            />
+          ))}
+        </div>
+        {/* <p>Aasdasd</p> */}
+      </div>
+    ),
+    // content: (
+    //   <div className="space-y-4">
+    //     <div className="flex h-[40vh] gap-4 overflow-x-auto">
+    //       {aboutImages.map((image, index) => (
+    //         <div key={index} className="relative group flex-shrink-0">
+    //           <Image
+    //             src={image.src}
+    //             alt={image.alt}
+    //             className="h-full w-auto rounded-md"
+    //           />
+    //           <div 
+    //             className="
+    //               absolute inset-0 flex items-end justify-center p-4
+    //               opacity-0 group-hover:opacity-100 
+    //               transition-opacity duration-300
+    //             "
+    //           >
+    //             <p className="text-background text-center text-sm py-2 px-4 rounded-full bg-foreground/50">
+    //               {image.alt}
+    //             </p>
+    //           </div>
+    //         </div>
+    //       ))}
+    //     </div>
+    //   </div>
+    // ),
+  },
+];
+
+
+function AboutMeSection() {
+  const [openSection, setOpenSection] = useState<string | null>(null);
+
+  const handleSectionClick = (sectionTrigger: string) => {
+    setOpenSection(openSection === sectionTrigger ? null : sectionTrigger);
+  };
+
+  return (
+    <section id="about" className="px-6 md:px-12 py-24">
+      <h2 className="text-3xl md:text-4xl font-bold mb-8">About Me</h2>
+      <div className="space-y-4">
+        {aboutData.map((item) => {
+          const isOpen = openSection === item.trigger;
+          return (
+            <div key={item.trigger}>
+              <div
+                className="flex justify-between items-center cursor-pointer hover:bg-foreground/5 hover:underline underline-offset-4 rounded-lg p-2 -m-2"
+                onClick={() => handleSectionClick(item.trigger)}
+              >
+                <p className="text-lg text-muted-foreground">{item.trigger}</p>
+                <span className={`md:hidden text-muted-foreground/70 transition-transform duration-300 ${isOpen ? '-rotate-270' : ''}`}>
+                  {">"}
+                </span>
+              </div>
+              
+              <div
+                className={`
+                  grid overflow-hidden transition-all duration-300 ease-in-out
+                  ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}
+                `}
+              >
+                <div className="overflow-hidden">
+                  <div className="mt-4 p-4 bg-foreground/5 rounded-lg text-muted-foreground">
+                    {item.content}
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
 
 function ContactForm() {
   const [status, setStatus] = useState("Send >");

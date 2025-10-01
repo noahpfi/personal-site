@@ -56,3 +56,47 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.spinning-text-world {
+  --radius: 80px;
+  --num-elements: 6;
+
+  width: calc(var(--radius) * 2);
+  height: 5rem;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: spin-circle 20s linear infinite;
+}
+
+/* tailwind md breakpoint 768px */
+@media (min-width: 768px) {
+  .spinning-text-world {
+    --radius: 200px;
+    --num-elements: 10;
+  }
+}
+
+/* tailwind lg breakpoint 1024px */
+@media (min-width: 1024px) {
+  .spinning-text-world {
+    --radius: 250px;
+    --num-elements: 12;
+  }
+}
+
+.spinning-text-element {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  backface-visibility: hidden;
+  --rotation-angle: calc(var(--i) * (360deg / var(--num-elements)));
+  transform: rotateY(var(--rotation-angle)) translateZ(var(--radius));
+}
+
+@keyframes spin-circle {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(-360deg); }
+}
