@@ -3,7 +3,6 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --shade: #f1f1f1;
 }
 
 @theme inline {
@@ -15,7 +14,6 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
-    --shade: #303030;
   }
 }
 
@@ -27,8 +25,25 @@
       content: "";
       @apply absolute inset-0 z-[-1];
       @apply bg-background/40;
-      /* @apply rounded-2xl; */
     }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-in-scale {
+    animation: fadeInScale 0.3s ease-out forwards;
+  }
+
+  @keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
   }
 
   .momentum-scroll {
