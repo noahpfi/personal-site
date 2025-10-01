@@ -2,9 +2,12 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 import { useInView } from "@/app/hooks/useInView";
 import { sendEmail } from "@/app/actions";
+
+import layro from "@/public/projects/logo_farbe_hintergrund_transparent.svg"; 
 
 export default function Home() {
   const [heroInViewRef, heroInView] = useInView({threshold: 0.4});
@@ -47,6 +50,17 @@ export default function Home() {
                 title="Dev & Design of Industrial Printhead-Cleaning Software"
                 description="Made to be functional and intuitive in industrial environments."
                 stats={["Raspberry Pi", "Python", "Kivy", "API"]}
+              />
+              <ProjectCard
+                title="Logo design for industrial plotting robot"
+                stats={["Affinity Suite"]}
+                images={(
+                  <Image
+                    src={layro}
+                    alt="Logo LAYRO"
+                    objectFit="contain"
+                  />
+                )}
               />
               <ProjectCard
                 title="Calendar/Timetable optimization WebTool"
@@ -190,11 +204,12 @@ function SkillsSection() {
   );
 }
 
-function ProjectCard({ title, description, stats, status }: Readonly<{
+function ProjectCard({ title, description, stats, status, images }: Readonly<{
   title: string;
-  description: string;
+  description?: string;
   stats: string[];
   status?: string;
+  images?: React.ReactNode;
 }>) {
   const [modalOpen, setModalOpen] = useState(false);
   const [dragY, setDragY] = useState(0);
@@ -251,16 +266,21 @@ function ProjectCard({ title, description, stats, status }: Readonly<{
     <>
       <div 
         className="cursor-pointer border border-foreground/20 rounded-xl p-6 transition duration-300 hover:scale-[100.5%] hover:-translate-y-1 hover:shadow-xl"
-        onClick={() => setModalOpen(true)}
+        // onClick={() => setModalOpen(true)}
       >
         <h3 className="text-xl font-semibold mb-3">{title}</h3>
-        <p className="text-muted-foreground mb-4">{description}</p>
+        {description && <p className="text-muted-foreground mb-4">{description}</p>}
         <div className="flex flex-wrap gap-2">
           {stats.map((stat, i) => (
             <span key={i} className="px-3 py-1 bg-foreground/10 rounded-full text-sm">{stat}</span>
           ))}
           {status && <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm">{status}</span>}
         </div>
+        {images && (
+          <div className="flex flex-wrap">
+            {images}
+          </div>
+        )}
       </div>
 
       {modalOpen && (
@@ -303,7 +323,7 @@ function ProjectCard({ title, description, stats, status }: Readonly<{
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
               />
-              
+
               <div className="absolute top-0 left-0 w-full h-8 flex items-center justify-center pointer-events-none">
                 <div className="md:hidden w-12 h-1.5 bg-foreground/20 rounded-full" />
                 <button
