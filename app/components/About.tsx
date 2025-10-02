@@ -3,17 +3,8 @@ import Image from "next/image";
 
 import Reveal from "@/app/components/Reveal";
 
-import about_delight from "@/public/about/delight.jpg";
-import about_sole from "@/public/about/sole.jpg";
-import about_blank from "@/public/about/__.jpg";
-import about_love from "@/public/about/love.jpg";
-import about_personalProject from "@/public/about/personal_project.jpg";
-import about_studio from "@/public/about/studio.jpg";
-
-const ROLES = [
-  'Developer', 'Designer', 'Photographer', 
-  'Musician', 'Producer', 'Athlete'
-];
+import { ABOUT_ROLES } from "@/app/data/Data";
+import { ABOUT_IMAGES } from "@/app/data/Data";
 
 const BASE_HUES = [0, 30, 55, 175, 200, 240];
 
@@ -41,18 +32,9 @@ const generateColorPalette = (count: number): string[] => {
   return palette;
 };
 
-const colorPalette = generateColorPalette(ROLES.length);
+const colorPalette = generateColorPalette(ABOUT_ROLES.length);
 
-const aboutImages = [
-  { src: about_delight, alt: "delight." },
-  { src: about_blank, alt: "__" },
-  { src: about_sole, alt: "sole." },
-  { src: about_personalProject, alt: "personal project." },
-  { src: about_studio, alt: "studio." },
-  { src: about_love, alt: "love." },
-];
-
-const aboutData = [
+const ABOUT_DATA = [
   {
     trigger: "I'm Noah.",
     content: (
@@ -62,7 +44,7 @@ const aboutData = [
           By heart,
           <br/>
           <span>
-            {ROLES.map((role, i) => (
+            {ABOUT_ROLES.map((role, i) => (
               <React.Fragment key={role}>
                 <span style={{ color: colorPalette[i] }}>{role},</span>
                 <br/>
@@ -104,7 +86,7 @@ const aboutData = [
       <div className="space-y-4">
         <p>The 'art'</p>
         <div className="flex h-[40vh] gap-4 overflow-x-auto">
-          {aboutImages.map((image, index) => (
+          {ABOUT_IMAGES.map((image, index) => (
             <Image
               key={index}
               src={image.src}
@@ -130,7 +112,7 @@ export default function About() {
     <section id="about" className="px-6 md:px-12 py-24">
       <h2 className="text-3xl md:text-4xl font-bold mb-8">About Me</h2>
       <div className="space-y-4">
-        {aboutData.map((item, i) => {
+        {ABOUT_DATA.map((item, i) => {
           const isOpen = openSection === item.trigger;
           return (
             <Reveal delay={`${i * 20 + 50}ms`} notOnce key={item.trigger}>
