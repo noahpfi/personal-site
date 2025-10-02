@@ -1,6 +1,6 @@
 import { RefObject } from "react";
 
-import Reveal from "@/app/components/Reveal";
+import Reveal from "@/app/components/sections/Reveal";
 
 export default function Hero({ heroRef }: {
   heroRef: RefObject<HTMLElement | null>;

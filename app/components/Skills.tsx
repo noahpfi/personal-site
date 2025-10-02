@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Reveal from "@/app/components/Reveal";
+import Reveal from "@/app/components/sections/Reveal";
 import { SKILLS_DATA } from "@/app/data/Data";
 
 export default function Skills() {

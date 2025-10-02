@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
-import Reveal from "@/app/components/Reveal";
+import Reveal from "@/app/components/sections/Reveal";
 
 import { ABOUT_ROLES } from "@/app/data/Data";
 import { ABOUT_IMAGES } from "@/app/data/Data";

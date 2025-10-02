@@ -1,14 +1,14 @@
 'use client';
 
 import { useInView } from "@/app/hooks/useInView";
-import Reveal from "@/app/components/Reveal";
+import Reveal from "@/app/components/sections/Reveal";
 
-import Hero from "@/app/components/Hero";
-import Projects from "@/app/components/Projects";
+import Hero from "@/app/components/sections/Hero";
+import Projects from "@/app/components/sections/Projects";
 import Skills from "@/app/components/Skills";
-import Contact from "@/app/components/Contact";
-import About from "@/app/components/About";
-import Footer from "@/app/components/Footer";
+import Contact from "@/app/components/sections/Contact";
+import About from "@/app/components/sections/About";
+import Footer from "@/app/components/sections/Footer";
 
 export default function Home() {
   const [heroInViewRef, heroInView] = useInView<HTMLElement>({threshold: 0.4});

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 
-import Reveal from "@/app/components/Reveal";
+import Reveal from "@/app/components/sections/Reveal";
 
 import projects_layro_light from "@/public/projects/logo_farbe_hintergrund_transparent.svg";
 import projects_layro_dark from "@/public/projects/logo_weiß_hintergrund_transparent.svg";
