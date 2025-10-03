@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 
 import Reveal from "@/app/components/sections/Reveal";
+import { useMediaQuery } from "@/app/hooks/useMediaQuery";
 import { Project } from "@/app/data/Types";
 
 import { PROJECTS_DATA } from "@/app/data/Data";
@@ -40,6 +41,9 @@ function ProjectModal({ project, onClose }: Readonly<{
   const movementContainerRef = useRef<HTMLDivElement>(null);
   const [swipeThreshold, setSwipeThreshold] = useState(200);
 
+  const [isClosing, setIsClosing] = useState(false);
+  const isMinTailwindMd = useMediaQuery('(min-width: 768px)');
+
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => { document.body.style.overflow = 'auto'; };
@@ -48,7 +52,7 @@ function ProjectModal({ project, onClose }: Readonly<{
   useEffect(() => {
     const calculateThreshold = () => {
       if (movementContainerRef.current) {
-        setSwipeThreshold(movementContainerRef.current.clientHeight * 0.4); // 40% modal height
+        setSwipeThreshold(movementContainerRef.current.clientHeight * 0.2); // 40% modal height
       }
     };
     calculateThreshold();
@@ -70,17 +74,27 @@ function ProjectModal({ project, onClose }: Readonly<{
 
   const handleTouchEnd = () => {
     if (dragY > swipeThreshold) {
-      onClose();
+      handleClose();
     }
     else {
       setDragY(0);  // snap back if not closed
     }
   };
 
+  const handleClose = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      onClose();
+    }, 300);  // same as animate-fade-out
+  };
+
   return (
     <div 
-      className="fixed inset-0 z-50 flex flex-col bg-foreground/20 animate-fade-in md:justify-center md:items-center"
-      onClick={onClose}
+      className={`
+        fixed inset-0 z-50 flex flex-col bg-foreground/20 md:justify-center md:items-center
+        ${isClosing ? "animate-fade-out" : "animate-fade-in"}
+      `}
+      onClick={handleClose}
     >
       {/* drag handle (mobile only) */}
       <div
@@ -90,43 +104,51 @@ function ProjectModal({ project, onClose }: Readonly<{
         onTouchEnd={handleTouchEnd}
       />
       <div
-        ref={movementContainerRef}
-        className="
-          relative w-full h-[70vh] md:w-[70vw] md:h-[80vh]
-          transition-transform duration-300 ease-out
-        "
-        style={{ transform: `translateY(${dragY}px)` }}
+        className={`
+          w-full md:w-auto
+          ${isMinTailwindMd ? "" : (isClosing ? "animate-slide-out-mobile" : "animate-slide-in-mobile")}
+        `}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* floating back arrow (mobile only) */}
-        <div className="pointer-events-none absolute bottom-full left-4 mb-4 w-10 h-10 bg-background rounded-full flex items-center justify-center text-xl shadow-lg md:hidden">
-          {'<'}
-        </div>
         <div
+          ref={movementContainerRef}
           className="
-            relative w-full h-full bg-background shadow-2xl flex flex-col
-            rounded-t-2xl md:rounded-2xl
+            relative w-full h-[70vh] md:w-[70vw] md:h-[80vh]
+            transition-transform duration-300 ease-out
           "
+          style={{ transform: `translateY(${dragY}px)` }}
+          onClick={(e) => e.stopPropagation()}
         >
-          <div
-            className="absolute top-0 left-0 w-full h-16 md:hidden"
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-          />
-          <div className="absolute top-0 left-0 w-full h-8 flex items-center justify-center pointer-events-none">
-            <div className="md:hidden w-12 h-1.5 bg-foreground/20 rounded-full" />
-            <button
-              onClick={onClose}
-              className="absolute top-4 left-4 p-2 text-xl hover:underline underline-offset-4 pointer-events-auto hidden md:block"
-            >
-              {'<'}
-            </button>
+          {/* floating back arrow (mobile only) */}
+          <div className="pointer-events-none absolute bottom-full left-4 mb-4 w-10 h-10 bg-background rounded-full flex items-center justify-center text-xl shadow-lg md:hidden">
+            {'<'}
           </div>
-          <div className="flex-1 overflow-y-auto pt-16 px-6 md:px-12 pb-12">
-            <article>
-              {project.blog}
-            </article>
+          <div
+            className="
+              relative w-full h-full bg-background shadow-2xl flex flex-col
+              rounded-t-2xl md:rounded-2xl
+            "
+          >
+            <div
+              className="absolute top-0 left-0 w-full h-16 md:hidden"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            />
+            <div className="absolute top-0 left-0 w-full h-8 flex items-center justify-center pointer-events-none">
+              <div className="md:hidden w-12 h-1.5 bg-foreground/20 rounded-full" />
+              <button
+                onClick={handleClose}
+                className="absolute top-4 left-4 p-2 text-xl hover:underline underline-offset-4 pointer-events-auto hidden md:block"
+              >
+                {'<'}
+              </button>
+            </div>
+            <div className="flex-1 overflow-y-auto pt-16 px-6 md:px-12 pb-12">
+              <article>
+                {project.blog}
+              </article>
+            </div>
           </div>
         </div>
       </div>

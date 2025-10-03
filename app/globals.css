@@ -33,8 +33,35 @@
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .animate-fade-out {
+    animation: fadeOut 0.3s ease-out forwards;
+  }
+
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  .animate-slide-in-mobile {
+    animation: slideInMobile 0.2s ease-out forwards;
+  }
+
+  @keyframes slideInMobile {
+    from { transform: translateY(50%); }
+    to { transform: translateY(0); }
+  }
+
+  .animate-slide-out-mobile {
+    animation: slideOutMobile 0.3s ease-out forwards;
+  }
+
+  @keyframes slideOutMobile {
+    from { transform: translateY(0); }
+    to { transform: translateY(50%); }
   }
 
   .momentum-scroll {
