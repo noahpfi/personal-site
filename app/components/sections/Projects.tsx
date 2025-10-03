@@ -124,9 +124,9 @@ function ProjectModal({ project, onClose }: Readonly<{
             </button>
           </div>
           <div className="flex-1 overflow-y-auto pt-16 px-6 md:px-12 pb-12">
-            <article className="prose prose-invert prose-lg max-w-none">
-            {project.blog}
-          </article>
+            <article>
+              {project.blog}
+            </article>
           </div>
         </div>
       </div>
@@ -150,7 +150,7 @@ function ProjectCard({ project, onClick }: Readonly<{
           {project.stats.map((stat, i) => (
             <span key={i} className="px-3 py-1 bg-foreground/10 rounded-full text-sm">{stat}</span>
           ))}
-          {status && <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm">{status}</span>}
+          {project.status && <span className="px-3 py-1 bg-foreground/10 rounded-full text-sm">{project.status}</span>}
         </div>
         {project.images && (
           <div className="flex flex-wrap">
