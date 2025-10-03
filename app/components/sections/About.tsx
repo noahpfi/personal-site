@@ -92,6 +92,7 @@ const ABOUT_DATA = [
               src={image.src}
               alt={image.alt}
               className="h-full w-auto rounded-md"
+              priority
             />
           ))}
         </div>
