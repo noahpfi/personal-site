@@ -1,9 +1,81 @@
+import Image from "next/image";
+
+import projects_layro_light from "@/public/projects/logo_farbe_hintergrund_transparent.svg";
+import projects_layro_dark from "@/public/projects/logo_weiß_hintergrund_transparent.svg";
+
 import about_delight from "@/public/about/delight.jpg";
 import about_sole from "@/public/about/sole.jpg";
 import about_blank from "@/public/about/__.jpg";
 import about_love from "@/public/about/love.jpg";
 import about_personalProject from "@/public/about/personal_project.jpg";
 import about_studio from "@/public/about/studio.jpg";
+
+export const PROJECTS_DATA = [
+  {
+    title: "This site",
+    description: "A portfolio designed and built from scratch to showcase my process in one place.",
+    stats: ["Next.js", "React", "Tailwind"],
+    blog: (
+      <></>
+    )
+  },
+  {
+    title: "Dev & Design of Industrial Printhead-Cleaning Software",
+    description: "Made to be functional and intuitive in industrial environments.",
+    stats: ["Raspberry Pi", "Python", "Kivy", "API"],
+    blog: (
+      <></>
+    )
+  },
+  {
+    title: "Logo design for industrial plotting robot",
+    stats: ["Affinity Suite"],
+    images: (
+      <>
+        <Image
+          src={projects_layro_light}
+          alt="Logo LAYRO"
+          className="dark:hidden object-contain"
+        />
+        <Image
+          src={projects_layro_dark}
+          alt="Logo LAYRO"
+          className="not-dark:hidden object-contain opactiy-95"
+        />
+      </>
+    ),
+    blog: (
+      <></>
+    )
+  },
+  {
+    title: "Calendar/Timetable optimization WebTool",
+    description: "Visualize event overlaps and find optimal combinations based on several user preferences.",
+    stats: ["Next.js", "React", "SQLite", "API", "NP Optimization"],
+    status: "In Dev",
+    blog: (
+      <></>
+    )
+  },
+  {
+    title: "Personal Finance Management Tool",
+    description: "To visualize, track and plan spending, from the moment this month’s paycheck rolls in.",
+    stats: ["Flutter", "SQLite"],
+    status: "To Come",
+    blog: (
+      <></>
+    )
+  },
+  {
+    title: "AI-Driven Daily Fitness Newsletter",
+    description: "Get the most recent fitness news from multiple credible sources, condensed into a 5-minute read, right into your daily inbox.",
+    stats: ["n8n", "Docker"],
+    status: "To Come",
+    blog: (
+      <></>
+    )
+  }
+]
 
 export const SKILLS_DATA = {
   Frontend: [
