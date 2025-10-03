@@ -17,7 +17,8 @@ export default function Projects() {
           <Reveal key={i} delay={`${i % 2 ? 150 : 100}ms`} threshold={i < 2 ? 0.1 : 0.4} notOnce>
             <ProjectCard
               project={project}
-              onClick={() => setActiveProject(project)}
+              // onClick={() => setActiveProject(project)}
+              onClick={() => {return}}
             />
           </Reveal>
         ))}

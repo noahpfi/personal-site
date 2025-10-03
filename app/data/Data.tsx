@@ -16,7 +16,12 @@ export const PROJECTS_DATA = [
     description: "A portfolio designed and built from scratch to showcase my process in one place.",
     stats: ["Next.js", "React", "Tailwind"],
     blog: (
-      <></>
+      <div className="space-y-6">
+        <h1 className="text-3xl md:text-4xl font-bold">This project Deep Dive hasn't yet been written :{"("}</h1>
+        <p className="text-lg text-muted-foreground">
+          Damn it, where did all my time go?
+        </p>
+      </div>
     )
   },
   {
@@ -24,7 +29,12 @@ export const PROJECTS_DATA = [
     description: "Made to be functional and intuitive in industrial environments.",
     stats: ["Raspberry Pi", "Python", "Kivy", "API"],
     blog: (
-      <></>
+      <div className="space-y-6">
+        <h1 className="text-3xl md:text-4xl font-bold">This project Deep Dive hasn't yet been written :{"("}</h1>
+        <p className="text-lg text-muted-foreground">
+          Damn it, where did all my time go?
+        </p>
+      </div>
     )
   },
   {
@@ -45,7 +55,12 @@ export const PROJECTS_DATA = [
       </>
     ),
     blog: (
-      <></>
+      <div className="space-y-6">
+        <h1 className="text-3xl md:text-4xl font-bold">This project Deep Dive hasn't yet been written :{"("}</h1>
+        <p className="text-lg text-muted-foreground">
+          Damn it, where did all my time go?
+        </p>
+      </div>
     )
   },
   {
@@ -54,7 +69,12 @@ export const PROJECTS_DATA = [
     stats: ["Next.js", "React", "SQLite", "API", "NP Optimization"],
     status: "In Dev",
     blog: (
-      <></>
+      <div className="space-y-6">
+        <h1 className="text-3xl md:text-4xl font-bold">This project Deep Dive hasn't yet been written :{"("}</h1>
+        <p className="text-lg text-muted-foreground">
+          Damn it, where did all my time go?
+        </p>
+      </div>
     )
   },
   {
@@ -63,7 +83,12 @@ export const PROJECTS_DATA = [
     stats: ["Flutter", "SQLite"],
     status: "To Come",
     blog: (
-      <></>
+      <div className="space-y-6">
+        <h1 className="text-3xl md:text-4xl font-bold">This project Deep Dive hasn't yet been written :{"("}</h1>
+        <p className="text-lg text-muted-foreground">
+          Damn it, where did all my time go?
+        </p>
+      </div>
     )
   },
   {
@@ -72,7 +97,12 @@ export const PROJECTS_DATA = [
     stats: ["n8n", "Docker"],
     status: "To Come",
     blog: (
-      <></>
+      <div className="space-y-6">
+        <h1 className="text-3xl md:text-4xl font-bold">This project Deep Dive hasn't yet been written :{"("}</h1>
+        <p className="text-lg text-muted-foreground">
+          Damn it, where did all my time go?
+        </p>
+      </div>
     )
   }
 ]
