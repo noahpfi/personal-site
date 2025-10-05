@@ -33,11 +33,13 @@ export default function Projects() {
   );
 }
 
-// TODO add swipe when scrolled to top
 function ProjectModal({ project, onClose }: Readonly<{
   project: Project;
   onClose: () => void;
 }>) {
+  const scrollContentRef = useRef<HTMLDivElement>(null);
+  const [scrolledToTop, setScrolledToTop] = useState(true);
+
   const [dragY, setDragY] = useState(0);
   const dragStartRef = useRef(0);
   const movementContainerRef = useRef<HTMLDivElement>(null);
@@ -54,13 +56,21 @@ function ProjectModal({ project, onClose }: Readonly<{
   useEffect(() => {
     const calculateThreshold = () => {
       if (movementContainerRef.current) {
-        setSwipeThreshold(movementContainerRef.current.clientHeight * 0.2); // 40% modal height
+        setSwipeThreshold(movementContainerRef.current.clientHeight * 0.1); // 40% modal height
       }
     };
     calculateThreshold();
     window.addEventListener('resize', calculateThreshold);
     return () => window.removeEventListener('resize', calculateThreshold);
   }, []);
+
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const isAtTop = e.currentTarget.scrollTop < e.currentTarget.scrollHeight * 0.5; // above 50% scroll height
+    console.log(e.currentTarget.scrollHeight);
+    console.log(e.currentTarget.scrollTop);
+
+    isAtTop !== scrolledToTop && setScrolledToTop(isAtTop);
+  };
 
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     dragStartRef.current = e.targetTouches[0].clientY;
@@ -69,8 +79,17 @@ function ProjectModal({ project, onClose }: Readonly<{
   const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
     const touchY = e.targetTouches[0].clientY;
     const deltaY = touchY - dragStartRef.current;
-    if (deltaY > 0) { // only allow dragging down
+    const contentEl = scrollContentRef.current;
+    if (!contentEl) return;
+
+    // intent: drag modal down
+    if (deltaY > 0 && contentEl.scrollTop === 0) {
+      e.stopPropagation();
       setDragY(deltaY);
+    }
+    // intent: scroll content
+    else {
+      setDragY(0);
     }
   };
 
@@ -79,7 +98,7 @@ function ProjectModal({ project, onClose }: Readonly<{
       handleClose();
     }
     else {
-      setDragY(0);  // snap back if not closed
+      setDragY(0);
     }
   };
 
@@ -122,7 +141,7 @@ function ProjectModal({ project, onClose }: Readonly<{
           onClick={(e) => e.stopPropagation()}
         >
           {/* floating back arrow (mobile only) */}
-          <div className="pointer-events-none absolute bottom-full left-4 mb-4 w-10 h-10 bg-background rounded-full flex items-center justify-center text-xl shadow-lg md:hidden">
+          <div className="pointer-events-none absolute bottom-full left-4 mb-4 w-10 h-10 bg-foreground/10 rounded-full flex items-center justify-center text-xl shadow-lg md:hidden">
             {'<'}
           </div>
           <div
@@ -130,6 +149,9 @@ function ProjectModal({ project, onClose }: Readonly<{
               relative w-full h-full bg-background shadow-2xl flex flex-col
               rounded-t-2xl md:rounded-2xl overflow-clip
             "
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           >
             <div
               className="absolute top-0 left-0 w-full h-16 md:hidden"
@@ -146,7 +168,11 @@ function ProjectModal({ project, onClose }: Readonly<{
                 {'<'}
               </button>
             </div>
-            <div className="flex-1 overflow-y-auto pt-16 px-6 md:px-12 pb-12">
+            <div ref={scrollContentRef} onScroll={handleScroll} className={`
+              flex-1 overflow-y-auto
+              ${scrolledToTop ? "overscroll-y-none" : "overscroll-y-auto"} md:overscroll-auto
+              pt-16 px-6 md:px-12 pb-12`
+            }>
               <article>
                 {project.blog}
               </article>
