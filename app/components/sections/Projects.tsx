@@ -33,6 +33,7 @@ export default function Projects() {
   );
 }
 
+// TODO add swipe when scrolled to top
 function ProjectModal({ project, onClose }: Readonly<{
   project: Project;
   onClose: () => void;
@@ -92,7 +93,7 @@ function ProjectModal({ project, onClose }: Readonly<{
   return (
     <div 
       className={`
-        fixed inset-0 z-50 flex flex-col bg-foreground/20 md:justify-center md:items-center
+        fixed inset-0 z-50 flex flex-col bg-black/30 md:justify-center md:items-center
         ${isClosing ? "animate-fade-out" : "animate-fade-in"}
       `}
       onClick={handleClose}
@@ -114,7 +115,7 @@ function ProjectModal({ project, onClose }: Readonly<{
         <div
           ref={movementContainerRef}
           className="
-            relative w-full h-[70vh] md:w-[70vw] md:h-[80vh]
+            relative w-full h-[75vh] md:w-[70vw] md:h-[80vh]
             transition-transform duration-300 ease-out
           "
           style={{ transform: `translateY(${dragY}px)` }}
@@ -127,7 +128,7 @@ function ProjectModal({ project, onClose }: Readonly<{
           <div
             className="
               relative w-full h-full bg-background shadow-2xl flex flex-col
-              rounded-t-2xl md:rounded-2xl
+              rounded-t-2xl md:rounded-2xl overflow-clip
             "
           >
             <div
@@ -136,8 +137,8 @@ function ProjectModal({ project, onClose }: Readonly<{
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
             />
-            <div className="absolute top-0 left-0 w-full h-8 flex items-center justify-center pointer-events-none">
-              <div className="md:hidden w-12 h-1.5 bg-foreground/20 rounded-full" />
+            <div className="absolute top-0 left-0 w-full h-8 flex items-center justify-center pointer-events-none"> {/* bg-gradient-to-b from-background md:from-transparent to-transparent */}
+              <div className="md:hidden w-12 h-1.5 bg-foreground/20 rounded-full"/>
               <button
                 onClick={handleClose}
                 className="absolute top-4 left-4 p-2 text-xl hover:underline underline-offset-4 pointer-events-auto hidden md:block"
