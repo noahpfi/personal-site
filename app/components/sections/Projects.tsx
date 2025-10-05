@@ -74,6 +74,7 @@ function ProjectModal({ project, onClose }: Readonly<{
 
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     dragStartRef.current = e.targetTouches[0].clientY;
+    e.stopPropagation();
   };
 
   const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
@@ -102,6 +103,24 @@ function ProjectModal({ project, onClose }: Readonly<{
     }
   };
 
+  const handleDragOnlyStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    dragStartRef.current = e.targetTouches[0].clientY;
+  };
+  const handleDragOnlyMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    const touchY = e.targetTouches[0].clientY;
+    const deltaY = touchY - dragStartRef.current;
+    if (deltaY > 0) {
+      setDragY(deltaY);
+    }
+  };
+  const handleDragOnlyEnd = () => {
+    if (dragY > swipeThreshold) {
+      handleClose();
+    } else {
+      setDragY(0);
+    }
+  };
+
   const handleClose = () => {
     setIsClosing(true);
     setTimeout(() => {
@@ -120,9 +139,9 @@ function ProjectModal({ project, onClose }: Readonly<{
       {/* drag handle (mobile only) */}
       <div
         className="flex-1 w-full md:hidden"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
+        onTouchStart={handleDragOnlyStart}
+        onTouchMove={handleDragOnlyMove}
+        onTouchEnd={handleDragOnlyEnd}
       />
       <div
         className={`
