@@ -32,6 +32,8 @@ export default function Projects() {
   );
 }
 
+// the modal slides up and the project card below is visible fading out
+// add drag up to make it fill the screen
 function ProjectModal({ project, onClose }: Readonly<{
   project: Project;
   onClose: () => void;
@@ -55,7 +57,7 @@ function ProjectModal({ project, onClose }: Readonly<{
   useEffect(() => {
     const calculateThreshold = () => {
       if (movementContainerRef.current) {
-        setSwipeThreshold(movementContainerRef.current.clientHeight * 0.1); // 40% modal height
+        setSwipeThreshold(movementContainerRef.current.clientHeight * 0.1); // 10% modal height
       }
     };
     calculateThreshold();
@@ -128,14 +130,14 @@ function ProjectModal({ project, onClose }: Readonly<{
   return (
     <div 
       className={`
-        fixed inset-0 z-50 flex flex-col bg-black/30 md:justify-center md:items-center
+        fixed inset-0 z-40 flex flex-col bg-black/30 md:justify-center md:items-center
         ${isClosing ? "animate-fade-out" : "animate-fade-in"}
       `}
       onClick={handleClose}
     >
       {/* drag handle (mobile only) */}
       <div
-        className="flex-1 w-full md:hidden"
+        className="flex-1 w-full -mb-16 z-50 md:hidden"
         onTouchStart={handleDragOnlyStart}
         onTouchMove={handleDragOnlyMove}
         onTouchEnd={handleDragOnlyEnd}
@@ -160,6 +162,7 @@ function ProjectModal({ project, onClose }: Readonly<{
           <div className="pointer-events-none absolute bottom-full left-4 mb-4 w-10 h-10 bg-background/75 dark:bg-foreground/10 rounded-full flex items-center justify-center text-xl shadow-lg md:hidden">
             {'<'}
           </div>
+          {/* content container */}
           <div
             className="
               relative w-full h-full bg-background shadow-2xl flex flex-col
@@ -169,13 +172,7 @@ function ProjectModal({ project, onClose }: Readonly<{
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
-            <div
-              className="absolute top-0 left-0 w-full h-16 md:hidden"
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-            />
-            <div className="absolute top-0 left-0 w-full h-8 flex items-center justify-center pointer-events-none"> {/* bg-gradient-to-b from-background md:from-transparent to-transparent */}
+            <div className="absolute top-0 left-0 w-full h-4 flex items-center justify-center pointer-events-none bg-background border-b border-b-foreground/20">
               <div className="md:hidden w-12 h-1.5 bg-foreground/20 rounded-full"/>
               <button
                 onClick={handleClose}
