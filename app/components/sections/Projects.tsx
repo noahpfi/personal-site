@@ -145,6 +145,7 @@ function ProjectModal({ project, onClose }: Readonly<{
         md:flex md:justify-center md:items-center
         transition-opacity duration-300
         ${isClosing ? "opacity-0" : "opacity-100"}
+        touch-none
       `}
       onClick={handleClose}
     >
@@ -201,6 +202,7 @@ function ProjectModal({ project, onClose }: Readonly<{
           {/* scrollable content */}
           <div ref={scrollContentRef} onScroll={handleScroll} className={`
             flex-1 overflow-y-auto
+            touch-pan-y md:touch-auto
             ${scrolledToTop ? "overscroll-y-none" : "overscroll-y-auto"} md:overscroll-auto
             pt-16 px-6 md:px-12 pb-12`
           }>
