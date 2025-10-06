@@ -18,7 +18,6 @@ export default function Projects() {
             <ProjectCard
               project={project}
               onClick={() => setActiveProject(project)}
-              // onClick={() => {return}}
             />
           </Reveal>
         ))}
@@ -208,8 +207,12 @@ function ProjectCard({ project, onClick }: Readonly<{
   return (
     <>
       <div 
-        className="cursor-pointer border border-foreground/20 rounded-xl p-6 transition duration-300 hover:scale-[100.5%] hover:-translate-y-1 hover:shadow-xl"
-        onClick={onClick}
+        className={`
+          border border-foreground/20 rounded-xl p-6
+          transition duration-300
+          ${!project.status && "cursor-pointer hover:scale-[100.5%] hover:-translate-y-1 hover:shadow-xl"}
+        `}
+        onClick={!project.status ? onClick : () => {return}}
       >
         <h3 className="text-xl font-semibold mb-3">{project.title}</h3>
         {project.description && <p className="text-muted-foreground mb-4">{project.description}</p>}
