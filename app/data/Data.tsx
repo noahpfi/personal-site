@@ -248,10 +248,61 @@ export const PROJECTS_DATA = [
     ),
     blog: (
       <div className="space-y-8">
-        <h1 className="text-3xl md:text-4xl font-bold">This project Deep Dive hasn't yet been written :{"("}</h1>
+        <h1 className="text-3xl md:text-4xl font-bold">A Mark for an Industrial Robot</h1>
         <p className="text-lg text-muted-foreground">
-          Damn it, where did all my time go? 
+          This was a freelance project to design a clean, technical,
+          and scalable logo for a new industrial plotting robot named LAYRO.
+          The goal was to create a logo that felt modern and precise, reflecting the machine's capabilities.
         </p>
+        
+        <div>
+          <h2 className="text-2xl font-semibold mb-3">The Process</h2>
+          <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+            <li><strong>Kickoff & Discovery:</strong> Started with an onboarding call
+              to nail down the objectives—the desired look and feel, brand consistency,
+              and crucially, where, how, and by who the logo would be used
+              (on the machine itself, in software, on marketing materials, the people working with the robot).
+            </li>
+            <li><strong>Iterative Design:</strong> Two rounds of feedback, 
+              after the initial brief, I delivered 3-5 distinct concepts.
+              Based on the client's picks and suggestions, I evolved the strongest designs
+              for the second round, leading us to the final version.
+            </li>
+            <li><strong>Comprehensive Delivery:</strong> Full logo package with color,
+              white (all-white), all-black, and company colors versions,
+              each in print (PSD, PDF, EPS) and web (SVG, PNG, JPG) formats.
+            </li>
+          </ul>
+        </div>
+        
+        <blockquote className="border-l-4 border-foreground/30 pl-4 italic text-muted-foreground">
+          The real challenge wasn't just making it look good on a screen,
+          but designing something that felt at home stamped onto a piece of precision hardware.
+        </blockquote>
+
+        <div>
+          <h2 className="text-2xl font-semibold mb-3">What I Learned</h2>
+          <p className="text-muted-foreground">
+            This project was a fantastic lesson in client collaboration and
+            the art of translating abstract feedback—like
+            "we like the technical lettering but maybe its too unreadable"—into concrete design decisions.
+            It reinforced the importance of a structured, iterative process to get
+            to a final product that everyone is genuinely happy with.
+          </p>
+        </div>
+
+        <div className="flex flex-wrap">
+          <Image
+            src={projects_layro_light}
+            alt="Logo LAYRO"
+            className="dark:hidden object-contain"
+          />
+          <Image
+            src={projects_layro_dark}
+            alt="Logo LAYRO"
+            className="not-dark:hidden object-contain opactiy-95"
+          />
+        </div>
       </div>
     )
   },
