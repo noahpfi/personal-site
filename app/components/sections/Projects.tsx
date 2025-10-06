@@ -17,8 +17,8 @@ export default function Projects() {
           <Reveal key={i} delay={`${i % 2 ? 150 : 100}ms`} threshold={i < 2 ? 0.1 : 0.4} notOnce>
             <ProjectCard
               project={project}
-              // onClick={() => setActiveProject(project)}
-              onClick={() => {return}}
+              onClick={() => setActiveProject(project)}
+              // onClick={() => {return}}
             />
           </Reveal>
         ))}
@@ -66,8 +66,6 @@ function ProjectModal({ project, onClose }: Readonly<{
 
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const isAtTop = e.currentTarget.scrollTop < e.currentTarget.scrollHeight * 0.5; // above 50% scroll height
-    console.log(e.currentTarget.scrollHeight);
-    console.log(e.currentTarget.scrollTop);
 
     isAtTop !== scrolledToTop && setScrolledToTop(isAtTop);
   };
@@ -160,7 +158,7 @@ function ProjectModal({ project, onClose }: Readonly<{
           onClick={(e) => e.stopPropagation()}
         >
           {/* floating back arrow (mobile only) */}
-          <div className="pointer-events-none absolute bottom-full left-4 mb-4 w-10 h-10 bg-foreground/10 rounded-full flex items-center justify-center text-xl shadow-lg md:hidden">
+          <div className="pointer-events-none absolute bottom-full left-4 mb-4 w-10 h-10 bg-background/75 dark:bg-foreground/10 rounded-full flex items-center justify-center text-xl shadow-lg md:hidden">
             {'<'}
           </div>
           <div

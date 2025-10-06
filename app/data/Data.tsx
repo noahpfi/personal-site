@@ -1,7 +1,13 @@
 import Image from "next/image";
 
+import AudioPreview from "@/app/components/AudioPreview";
+
 import projects_layro_light from "@/public/projects/logo_farbe_hintergrund_transparent.svg";
 import projects_layro_dark from "@/public/projects/logo_weiß_hintergrund_transparent.svg";
+
+import wave808_1 from "@/public/projects/808_1.png";
+import wave808_3 from "@/public/projects/808_3.png";
+import waveSAIL_808 from "@/public/projects/SAIL_808.png";
 
 import about_delight from "@/public/about/delight.jpg";
 import about_sole from "@/public/about/sole.jpg";
@@ -9,6 +15,24 @@ import about_blank from "@/public/about/__.jpg";
 import about_love from "@/public/about/love.jpg";
 import about_personalProject from "@/public/about/personal_project.jpg";
 import about_studio from "@/public/about/studio.jpg";
+
+const AUDIO_SAMPLES = [
+  {
+    audioSrc: "/projects/808_1.mp3",
+    waveformSrc: wave808_1,
+    alt: 'Waveform of a punchy 808 bass sound',
+  },
+  {
+    audioSrc: "/projects/808_3.mp3",
+    waveformSrc: wave808_3,
+    alt: 'Waveform of a clean 808 bass sound',
+  },
+  {
+    audioSrc: "/projects/SAIL_808.mp3",
+    waveformSrc: waveSAIL_808,
+    alt: 'Waveform of a distorted 808 bass sound',
+  },
+];
 
 export const PROJECTS_DATA = [
   {
@@ -74,6 +98,96 @@ export const PROJECTS_DATA = [
         <p className="text-lg text-muted-foreground">
           Damn it, where did all my time go?
         </p>
+      </div>
+    )
+  },
+  {
+    title: "AI Audio Sample-pack Generator",
+    description: "Commandline tool for creating unique audio samples using a built-from-scratch AI model.",
+    stats: ["Python", "Tensorflow", "Keras", "Audio Production"],
+    blog: (
+      <div className="space-y-8">
+        <h1 className="text-3xl md:text-4xl font-bold">An AI to generate new Sounds</h1>
+        <p className="text-lg text-muted-foreground">
+          This was a deep dive from some time back, born from a personal itch—as a musician,
+          I was tired of using the same old 808 samples.
+          So, why not build an AI that could create entirely new ones?
+          This became a command-line tool built around a generative model I designed and trained from scratch.
+        </p>
+        
+        <div>
+          <h2 className="text-2xl font-semibold mb-3">Goals & Objectives</h2>
+          <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+            <li>To go beyond just using AI, and actually build and understand a generative model from the ground up.</li>
+            <li>To build a practical tool that could create unique, usable audio samples for my own music projects.</li>
+            <li>To create the end-to-end machine learning pipeline: from raw data to a finished, processed output.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 className="text-2xl font-semibold mb-3">Core Technologies</h2>
+          <div className="space-y-3 text-muted-foreground">
+            <p>
+              <strong className="font-semibold text-foreground">Python:</strong> First choice for this kind of work—for everything from data processing to model training.
+            </p>
+            <p>
+              <strong className="font-semibold text-foreground">Tensorflow & Keras:</strong> Used these to design and build the neural network.
+              The model itself: a Variational Autoencoder (VAE) with Inverse Autoregressive Flows (IAF), to help it learn more complex and detailed sound structures.
+            </p>
+            <p>
+              <strong className="font-semibold text-foreground">Librosa:</strong> An incredible library for audio analysis.
+              I used it to handle the crucial first step: convert all the raw audio into Mel Spectrograms—basically, turning sound into 'images' so the AI could 'see' it.
+            </p>
+          </div>
+        </div>
+        
+        <blockquote className="border-l-4 border-foreground/30 pl-4 italic text-muted-foreground">
+          Let&apos;s be real: the final code is lost to a hard drive failure somewhere. The dataset is gone. What remains is the process, the proof of concept, and the lessons learned.
+        </blockquote>
+
+        <div>
+          <h2 className="text-2xl font-semibold mb-3">Key Features & Process</h2>
+          <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+              <li><strong>Custom Data Pipeline:</strong> I curated a dataset of about 1000 of 808 bass samples.
+                The pipeline loads, normalizes, trims or pads, and converts each one into a Mel Spectrogram for training.
+              </li>
+              <li><strong>Generative VAE Model:</strong> The core of the project.
+                The model learned the 'essence' of what makes an 808 sound like an 808,
+                allowing it to generate entirely new spectrograms from a random point in its latent space.
+              </li>
+              <li><strong>Audio Post-Processing Chain:</strong> Raw AI output is almost always messy.
+                I built a pipeline to convert the generated spectrogram back into an audio wave,
+                then automatically upsample, filter, EQ, and saturate it to make it sound clean and usable in a real track.
+              </li>
+          </ul>
+        </div>
+        
+        <div>
+          <h2 className="text-2xl font-semibold mb-3">Generated Samples</h2>
+          <p className="text-muted-foreground mb-4">A few of the 808s the model generated that I managed to save:</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+          {AUDIO_SAMPLES.map((sample) => (
+            <AudioPreview
+              key={sample.audioSrc}
+              audioSrc={sample.audioSrc}
+              waveformSrc={sample.waveformSrc}
+              alt={sample.alt}
+            />
+          ))}
+        </div>
+        </div>
+        
+        <div>
+          <h2 className="text-2xl font-semibold mb-3">What I Learned (And What's Left)</h2>
+          <p className="text-muted-foreground">
+            This project was my hands-on deep dive into the entire ML workflow.
+            The biggest takeaway was just how crucial the 'last mile' is—raw AI output is one thing,
+            but building the processing pipeline to make it genuinely useful was where most of the work happened.
+            It also taught me a brutal lesson in backups, lol.
+            The <a href="https://github.com/noahpfi/SamplePackVAE" target="blank" className="underline underline-offset-4">Github repo</a> is incomplete,
+            an artifact of what's left, but the core model and the process remain.
+          </p>
+        </div>
       </div>
     )
   },
