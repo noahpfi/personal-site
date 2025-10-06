@@ -2,12 +2,16 @@ import Image from "next/image";
 
 import AudioPreview from "@/app/components/AudioPreview";
 
+import projects_dipl_home from "@/public/projects/Home.jpg";
+import projects_dipl_program from "@/public/projects/Program.jpg";
+import projects_dipl_debug from "@/public/projects/Debug_3-2.jpg";
+
 import projects_layro_light from "@/public/projects/logo_farbe_hintergrund_transparent.svg";
 import projects_layro_dark from "@/public/projects/logo_weiß_hintergrund_transparent.svg";
 
-import wave808_1 from "@/public/projects/808_1.png";
-import wave808_3 from "@/public/projects/808_3.png";
-import waveSAIL_808 from "@/public/projects/SAIL_808.png";
+import projects_sampleAI_wave808_1 from "@/public/projects/808_1.png";
+import projects_sampleAI_wave808_3 from "@/public/projects/808_3.png";
+import projects_sampleAI_waveSAIL_808 from "@/public/projects/SAIL_808.png";
 
 import about_delight from "@/public/about/delight.jpg";
 import about_sole from "@/public/about/sole.jpg";
@@ -19,17 +23,17 @@ import about_studio from "@/public/about/studio.jpg";
 const AUDIO_SAMPLES = [
   {
     audioSrc: "/projects/808_1.mp3",
-    waveformSrc: wave808_1,
+    waveformSrc: projects_sampleAI_wave808_1,
     alt: 'Waveform of a punchy 808 bass sound',
   },
   {
     audioSrc: "/projects/808_3.mp3",
-    waveformSrc: wave808_3,
+    waveformSrc: projects_sampleAI_wave808_3,
     alt: 'Waveform of a clean 808 bass sound',
   },
   {
     audioSrc: "/projects/SAIL_808.mp3",
-    waveformSrc: waveSAIL_808,
+    waveformSrc: projects_sampleAI_waveSAIL_808,
     alt: 'Waveform of a distorted 808 bass sound',
   },
 ];
@@ -40,10 +44,10 @@ export const PROJECTS_DATA = [
     description: "A portfolio designed and built from scratch to showcase my process in one place.",
     stats: ["Next.js", "React", "Tailwind"],
     blog: (
-      <div className="space-y-6">
+      <div className="space-y-8">
         <h1 className="text-3xl md:text-4xl font-bold">This project Deep Dive hasn't yet been written :{"("}</h1>
         <p className="text-lg text-muted-foreground">
-          Damn it, where did all my time go?
+          Damn it, where did all my time go? 
         </p>
       </div>
     )
@@ -53,11 +57,109 @@ export const PROJECTS_DATA = [
     description: "Made to be functional and intuitive in industrial environments.",
     stats: ["Raspberry Pi", "Python", "Kivy", "API"],
     blog: (
-      <div className="space-y-6">
-        <h1 className="text-3xl md:text-4xl font-bold">This project Deep Dive hasn't yet been written :{"("}</h1>
+      <div className="space-y-8">
+        <h1 className="text-3xl md:text-4xl font-bold">Bringing Industrial Printheads Back to Life</h1>
         <p className="text-lg text-muted-foreground">
-          Damn it, where did all my time go?
+          This was my collegue and I's Diplomarbeit, the final thesis project for HTL.
+          The task was to take an unfinished, bare-bones prototype from an industrial printing company (aeoon) and turn it into a fully functional,
+          user-friendly machine that could save them a small fortune.
         </p>
+        
+        <div>
+          <h2 className="text-2xl font-semibold mb-3">The Problem</h2>
+          <p className="text-muted-foreground">
+            Industrial printheads, worth about €5000 a piece, get clogged with ink and become expensive paperweights.
+            The company had a rough mechanical concept for a flushing unit,
+            but the electrical and software side was a blank slate.
+            Our job was to bring it to life—my collegue did the mechanical part, i did the software part.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-2xl font-semibold mb-3">Core Technologies</h2>
+          <div className="space-y-3 text-muted-foreground">
+            <p>
+              <strong className="font-semibold text-foreground">Raspberry Pi:</strong> The brain.
+              Powerful enough to run a modern UI and control all the hardware,
+              but small and simple enough for an embedded system.
+            </p>
+            <p>
+              <strong className="font-semibold text-foreground">Python:</strong> The perfect fit for a device that needed solid logic without crazy performance demands.
+              It let me focus on the 'what' (the cleaning process) instead of spending all my time in the low-level 'how' of C++.
+            </p>
+            <p>
+              <strong className="font-semibold text-foreground">Kivy:</strong> A Python GUI library that's honestly great for building custom touch interfaces.
+              It's cross-platform, so it runs smoothly on the Pi, and its open-source license meant the company could actually use it commercially.
+            </p>
+            <p>
+              <strong className="font-semibold text-foreground">GPIO & MOSFETs:</strong> The nuts and bolts.
+              I wrote the API to control the pumps and a complex array of valves directly from the Raspberry Pi's GPIO pins,
+              using MOSFETs for reliable electronic switching.
+            </p>
+          </div>
+        </div>
+        
+        <blockquote className="border-l-4 border-foreground/30 pl-4 italic text-muted-foreground">
+          In an industrial setting, 'fancy' doesn't matter. 'Works every single time' and 'is dead simple to use'
+          are the things that do. That was the entire design philosophy.
+        </blockquote>
+
+        <div>
+          <h2 className="text-2xl font-semibold mb-3">Key Features</h2>
+          <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+              <li><strong>Task-Oriented Touch UI:</strong> Designed from the ground up for operators in a loud,
+                busy environment. Big buttons, clear iconography, and a straightforward flow—no training required.
+              </li>
+              <li><strong>On-the-Fly Program Control:</strong> Users can adjust the
+                flushing duration and pulse frequency in real-time
+                <span className="italic"> while a program is running</span>, 
+                allowing them to react to how a specific printhead is responding.
+              </li>
+              <li><strong>Live Diagnostic View:</strong> A graphical 'debug' screen that visualizes
+                the entire valve and pump system in real-time.
+                It made troubleshooting during development a breeze and serves as an expert tool for maintenance.
+              </li>
+              <li><strong>Complex State & Logic Management:</strong> The software manages eight different
+                flushing programs, each with unique valve combinations for reversing flow,
+                pulsing, and waste management, all handled by a robust state machine.
+              </li>
+          </ul>
+        </div>
+        
+        {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-2">
+          <div className="bg-muted rounded-md aspect-video flex items-center justify-center text-muted-foreground">
+            <Image
+              src={projects_dipl_home}
+              alt="Homescreen"
+              className="dark:hidden object-contain"
+            />
+          </div>
+          <div className="bg-muted rounded-md aspect-video flex items-center justify-center text-muted-foreground">
+            <Image
+              src={projects_dipl_program}
+              alt="Running program"
+              className="dark:hidden object-contain"
+            />
+          </div>
+          <div className="bg-muted rounded-md aspect-video flex items-center justify-center text-muted-foreground">
+            <Image
+              src={projects_dipl_debug}
+              alt="Debug view"
+              className="dark:hidden object-contain"
+            />
+          </div>
+        </div> */}
+        
+        <div>
+          <h2 className="text-2xl font-semibold mb-3">What I Learned</h2>
+          <p className="text-muted-foreground">
+            This project was a crash course in bridging the gap between hardware and software.
+            The biggest lesson? Sometimes the best move is to throw out the initial plan and start clean.
+            We scrapped the company's original, overly complex valve concept for a simpler,
+            more robust system that ultimately worked better. It was a massive lesson in pragmatic,
+            real-world engineering over theoretical perfection.
+          </p>
+        </div>
       </div>
     )
   },
@@ -79,10 +181,10 @@ export const PROJECTS_DATA = [
       </>
     ),
     blog: (
-      <div className="space-y-6">
+      <div className="space-y-8">
         <h1 className="text-3xl md:text-4xl font-bold">This project Deep Dive hasn't yet been written :{"("}</h1>
         <p className="text-lg text-muted-foreground">
-          Damn it, where did all my time go?
+          Damn it, where did all my time go? 
         </p>
       </div>
     )
@@ -93,10 +195,10 @@ export const PROJECTS_DATA = [
     stats: ["Next.js", "React", "SQLite", "API", "NP Optimization"],
     status: "In Dev",
     blog: (
-      <div className="space-y-6">
+      <div className="space-y-8">
         <h1 className="text-3xl md:text-4xl font-bold">This project Deep Dive hasn't yet been written :{"("}</h1>
         <p className="text-lg text-muted-foreground">
-          Damn it, where did all my time go?
+          Damn it, where did all my time go? 
         </p>
       </div>
     )
@@ -197,10 +299,10 @@ export const PROJECTS_DATA = [
     stats: ["Flutter", "SQLite"],
     status: "To Come",
     blog: (
-      <div className="space-y-6">
+      <div className="space-y-8">
         <h1 className="text-3xl md:text-4xl font-bold">This project Deep Dive hasn't yet been written :{"("}</h1>
         <p className="text-lg text-muted-foreground">
-          Damn it, where did all my time go?
+          Damn it, where did all my time go? 
         </p>
       </div>
     )
@@ -211,10 +313,10 @@ export const PROJECTS_DATA = [
     stats: ["n8n", "Docker"],
     status: "To Come",
     blog: (
-      <div className="space-y-6">
+      <div className="space-y-8">
         <h1 className="text-3xl md:text-4xl font-bold">This project Deep Dive hasn't yet been written :{"("}</h1>
         <p className="text-lg text-muted-foreground">
-          Damn it, where did all my time go?
+          Damn it, where did all my time go? 
         </p>
       </div>
     )
