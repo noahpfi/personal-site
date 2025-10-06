@@ -45,10 +45,76 @@ export const PROJECTS_DATA = [
     stats: ["Next.js", "React", "Tailwind"],
     blog: (
       <div className="space-y-8">
-        <h1 className="text-3xl md:text-4xl font-bold">This project Deep Dive hasn't yet been written :{"("}</h1>
+        <h1 className="text-3xl md:text-4xl font-bold">Portfolio: A Deep Dive</h1>
         <p className="text-lg text-muted-foreground">
-          Damn it, where did all my time go? 
+          This portfolio is a living project designed and built from scratch to
+          be a comprehensive showcase of my skills in both design and development.
         </p>
+        
+        <div>
+          <h2 className="text-2xl font-semibold mb-3">Goals & Objectives</h2>
+          <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+            <li>To design and build a fully responsive, aesthetically pleasing interface from the ground up.</li>
+            <li>To implement engaging, non-trivial micro-interactions and UI patterns.</li>
+            <li>To write clean, reusable, and well-documented code using modern best practices.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 className="text-2xl font-semibold mb-3">Core Technologies</h2>
+          <div className="space-y-3 text-muted-foreground">
+            <p>
+              <strong className="font-semibold text-foreground">Next.js & React:</strong> Leveraged for its robust framework,
+              Server Components, and efficient client-side navigation.
+              The entire site is built on a component-based architecture.
+            </p>
+            <p>
+              <strong className="font-semibold text-foreground">TypeScript:</strong> Used throughout the project to ensure type safety,
+              prevent bugs, and improve the overall development experience and maintainability.
+            </p>
+            <p>
+              <strong className="font-semibold text-foreground">Tailwind CSS:</strong> For its utility-first workflow
+              and the rapid development of a custom, responsive design without spending too much time on traditional CSS.
+            </p>
+          </div>
+        </div>
+        
+        <blockquote className="border-l-4 border-foreground/30 pl-4 italic text-muted-foreground">
+          The goal wasn't just to list my projects, but to make the portfolio itself a demonstration of my skills.
+        </blockquote>
+
+        <div>
+          <h2 className="text-2xl font-semibold mb-3">Features</h2>
+          <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+              <li><strong>3D Spinning Hero Text:</strong> A pure CSS 3D text carousel built using CSS
+                perspective and custom properties for a dynamic introduction.
+              </li>
+              <li><strong>Interactive Sections:</strong> Data-driven elements where users
+                can click to reveal details and more info, animated smoothly with CSS Grid.
+              </li>
+              <li><strong>Responsive Project Modal:</strong> A mobile-first 'bottom sheet' modal with
+                intuitive swipe-to-close gestures. Test it on your phone!
+              </li>
+              <li><strong>Dynamic Visuals:</strong> Subtle animations powered by 
+                reusable hooks and the IntersectionObserver API.
+              </li>
+          </ul>
+        </div>
+        
+        <div>
+          <h2 className="text-2xl font-semibold mb-3">What I Learned</h2>
+          <p className="text-muted-foreground">
+            Building this portfolio reinforced the importance of a clean,
+            component-based architecture. It was a fantastic opportunity to dive deep into
+            advanced CSS animations, gesture handling in React, and the importance of a type-safe codebase.
+          </p>
+        </div>
+
+        <span className="px-4 py-2 bg-foreground/10 rounded-full">
+          <a href="https://github.com/noahpfi/personal-site" target="blank" className="hover:underline underline-offset-4">
+            Github repo
+          </a>
+        </span>
       </div>
     )
   },
@@ -190,20 +256,6 @@ export const PROJECTS_DATA = [
     )
   },
   {
-    title: "Calendar/Timetable optimization WebTool",
-    description: "Visualize event overlaps and find optimal combinations based on several user preferences.",
-    stats: ["Next.js", "React", "SQLite", "API", "NP Optimization"],
-    status: "In Dev",
-    blog: (
-      <div className="space-y-8">
-        <h1 className="text-3xl md:text-4xl font-bold">This project Deep Dive hasn't yet been written :{"("}</h1>
-        <p className="text-lg text-muted-foreground">
-          Damn it, where did all my time go? 
-        </p>
-      </div>
-    )
-  },
-  {
     title: "AI Audio Sample-pack Generator",
     description: "Commandline tool for creating unique audio samples using a built-from-scratch AI model.",
     stats: ["Python", "Tensorflow", "Keras", "Audio Production"],
@@ -263,6 +315,22 @@ export const PROJECTS_DATA = [
               </li>
           </ul>
         </div>
+
+        <div className="space-y-2">
+          <h2 className="text-2xl font-semibold mb-2">MEL Spectrograms: the data format that brings it all together</h2>
+          <p className="text-muted-foreground">
+            Stuffing audio files in and out of an AI model is harder than it might seem:
+            a 1-second stereo audio sample in a typical sample rate (44.1kHz) already has 88,200 data points.
+            I needed a format that has high enough resolution to get usable outputs, but also
+            low enough for a small AI model on a commercial laptop to swallow—the answer were spectrograms,
+            which represent the audio not as individual values, but a 'collection' of frequencies over time—a consistent
+            data format that doesn't change with each sample.
+          </p>
+        </div>
+
+        <blockquote className="border-l-4 border-foreground/30 pl-4 italic text-muted-foreground">
+          Data representation is the make-or-break of projects like these.
+        </blockquote>
         
         <div>
           <h2 className="text-2xl font-semibold mb-3">Generated Samples</h2>
@@ -290,6 +358,26 @@ export const PROJECTS_DATA = [
             an artifact of what's left, but the core model and the process remain.
           </p>
         </div>
+
+        <span className="px-4 py-2 bg-foreground/10 rounded-full">
+          <a href="https://github.com/noahpfi/SamplePackVAE" target="blank" className="hover:underline underline-offset-4">
+            Github repo
+          </a>
+        </span>
+      </div>
+    )
+  },
+  {
+    title: "Calendar/Timetable optimization WebTool",
+    description: "Visualize event overlaps and find optimal combinations based on several user preferences.",
+    stats: ["Next.js", "React", "SQLite", "API", "NP Optimization"],
+    status: "In Dev",
+    blog: (
+      <div className="space-y-8">
+        <h1 className="text-3xl md:text-4xl font-bold">This project Deep Dive hasn't yet been written :{"("}</h1>
+        <p className="text-lg text-muted-foreground">
+          Damn it, where did all my time go? 
+        </p>
       </div>
     )
   },
