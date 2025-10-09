@@ -11,7 +11,7 @@ import About from "@/app/components/sections/About";
 import Footer from "@/app/components/sections/Footer";
 
 export default function Home() {
-  const [heroInViewRef, heroInView] = useInView<HTMLElement>({threshold: 0.4});
+  const [heroInViewRef, heroInView] = useInView<HTMLElement>({ threshold: 0.4, initiallyTrue: true });
 
   return (
     <div className="bg-background p-2 md:p-6">

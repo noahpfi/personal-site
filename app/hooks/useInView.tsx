@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, RefObject } from 'react';
 
 type UseInViewOptions = IntersectionObserverInit & {
   triggerOnce?: boolean;
+  initiallyTrue?: boolean;
 };
 
 export function useInView<T extends HTMLElement>(
@@ -11,12 +12,13 @@ export function useInView<T extends HTMLElement>(
 ): [RefObject<T | null>, boolean] {
   const { 
     triggerOnce = false, 
+    initiallyTrue = false,
     root, 
     rootMargin, 
     threshold = 0.1
   } = options;
 
-  const [isInView, setIsInView] = useState(false);
+  const [isInView, setIsInView] = useState(initiallyTrue);
   const ref = useRef<T>(null);
 
   useEffect(() => {
