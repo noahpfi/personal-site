@@ -105,7 +105,7 @@ export default function BottomSheet({ isOpen, onClose, children, snapPoints = [7
       onClick={onClose}
       onTransitionEnd={onTransitionEnd}
       className={`
-        fixed inset-0 bg-black/30 
+        fixed inset-0 z-10 bg-black/30 
         flex flex-col
         touch-none
         transition-opacity duration-300
@@ -115,7 +115,7 @@ export default function BottomSheet({ isOpen, onClose, children, snapPoints = [7
     >
       {/* drag zone (covers visual drag handle and top part of content area) */}
       <div
-        className="flex-1 z-10 -m-20"
+        className="flex-1 z-20 -m-20"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
