@@ -52,7 +52,7 @@ export default function BottomSheet({ isOpen, onClose, children, snapPoints = [7
       modalHeight: modalRef.current.offsetHeight,
       startY: y,
     };
-    e.preventDefault();
+    e.stopPropagation();
   };
 
   const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
@@ -64,7 +64,7 @@ export default function BottomSheet({ isOpen, onClose, children, snapPoints = [7
     setY(Math.max(0, Math.min(100, newHeightPercent)));
   };
 
-  const handleTouchEnd = () => {
+  const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
     setIsDragging(false);
     const { startY } = dragStartRef.current;
 
@@ -74,21 +74,28 @@ export default function BottomSheet({ isOpen, onClose, children, snapPoints = [7
       return;
     }
 
-    const lowestOpenPoint = Math.min(...openSnapPoints);
-    // drag start at lowest snap point
-    if (startY === lowestOpenPoint) {
-      const closeThreshold = lowestOpenPoint * 0.8; // 20% drag below closes
-      if (y < closeThreshold) {
-        setY(0);
-        onClose();
-        return;
-      }
-    }
-    // else find closest point to snap to (if lowest (0), close)
-    const closestPoint = snapPoints.reduce((prev, curr) => {
-      return (Math.abs(curr - y) < Math.abs(prev - y) ? curr : prev);
+    // else find closest in direction point to snap to (if lowest (0), close)
+    const dragDir = y - startY;
+
+    // filter in direction
+    const candidates = snapPoints.filter(point => {
+      if (dragDir > 0) return point > y;  // down
+      if (dragDir < 0) return point < y;  // up
+      return false;
     });
-    if (closestPoint == 0) {
+
+    let closestPoint;
+    if (candidates.length > 0) {
+      // find closest to drag end
+      closestPoint = candidates.reduce((prev, curr) => 
+        (Math.abs(curr - y) < Math.abs(prev - y)) ? curr : prev
+      );
+    }
+    else {
+      closestPoint = startY;
+    }
+
+    if (closestPoint === 0) {
       onClose();
     }
     else {
@@ -102,7 +109,6 @@ export default function BottomSheet({ isOpen, onClose, children, snapPoints = [7
 
   return (
     <div
-      onClick={onClose}
       onTransitionEnd={onTransitionEnd}
       className={`
         fixed inset-0 z-10 bg-black/30 
