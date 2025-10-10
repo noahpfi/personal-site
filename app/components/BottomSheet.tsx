@@ -10,6 +10,7 @@ export default function BottomSheet({ isOpen, onClose, children, snapPoints = [7
   const [isAnimating, setIsAnimating] = useState(false);
   
   const openSnapPoints = snapPoints.filter(p => p > 0);
+  const maxSnapPointY = Math.max(...openSnapPoints)
   const [y, setY] = useState(snapPoints[0]);
 
   const [isDragging, setIsDragging] = useState(false);
@@ -122,7 +123,7 @@ export default function BottomSheet({ isOpen, onClose, children, snapPoints = [7
     >
       {/* drag zone (covers visual drag handle and top part of content area) */}
       <div
-        className="flex-1 z-20 -m-20"
+        className={`flex-1 z-20 ${y == maxSnapPointY ? "-m-40" : "-m-20"}`}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
