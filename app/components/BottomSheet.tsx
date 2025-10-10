@@ -30,7 +30,8 @@ export default function BottomSheet({ isOpen, onClose, children, snapPoints = [7
       requestAnimationFrame(() => {
         setIsAnimating(true);
       });
-    } else {
+    }
+    else {
       setIsAnimating(false);
     }
   }, [isOpen]);
@@ -134,7 +135,8 @@ export default function BottomSheet({ isOpen, onClose, children, snapPoints = [7
         className={`
           w-full bottom-0 bg-background shadow-2xl flex flex-col
           rounded-t-2xl overflow-hidden
-          ${!isDragging && "transition-[height] duration-300"}
+          transition-[height] ease-out
+          ${isDragging ? 'duration-0' : 'duration-300'}
         `}
       >
         <div className="flex-shrink-0 relative top-0 left-0 w-full h-4 flex items-center justify-center touch-none border-b border-foreground/20">
