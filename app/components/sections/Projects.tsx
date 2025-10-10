@@ -78,7 +78,7 @@ function DesktopModal({ isOpen, onClose, children }: {
       onClick={onClose}
       onTransitionEnd={onTransitionEnd}
       className={`
-        fixed inset-0 bg-black/30 
+        fixed inset-0 z-10 bg-black/30 
         flex flex-col
         justify-center items-center
         touch-none
@@ -96,7 +96,7 @@ function DesktopModal({ isOpen, onClose, children }: {
       >
         <button
           onClick={onClose}
-          className="absolute top-0 left-0 z-10 px-4 py-2 text-xl hover:underline underline-offset-4"
+          className="absolute top-0 left-0 z-20 px-4 py-2 text-xl hover:underline underline-offset-4"
         >
           {'<'}
         </button>
