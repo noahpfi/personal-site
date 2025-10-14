@@ -192,7 +192,7 @@ export const PROJECTS_DATA = [
           </ul>
         </div>
         
-        {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-2">
           <div className="bg-muted rounded-md aspect-video flex items-center justify-center text-muted-foreground">
             <Image
               src={projects_dipl_home}
@@ -214,7 +214,7 @@ export const PROJECTS_DATA = [
               className="dark:hidden object-contain"
             />
           </div>
-        </div> */}
+        </div>
         
         <div>
           <h2 className="text-2xl font-semibold mb-3">What I Learned</h2>
