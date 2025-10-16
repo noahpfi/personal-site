@@ -119,7 +119,7 @@ function ProjectCard({ project, onClick }: Readonly<{
         className={`
           border border-foreground/20 rounded-xl p-6
           transition duration-300
-          ${!project.status ? "cursor-pointer hover:scale-[100.5%] hover:-translate-y-1 hover:shadow-xl" : "cursor-not-allowed"}
+          ${!project.status ? "cursor-pointer hover:scale-[100.5%] hover:-translate-y-1 hover:shadow-xl" : "bg-foreground/5"}
         `}
         onClick={!project.status ? onClick : () => {return}}
       >
