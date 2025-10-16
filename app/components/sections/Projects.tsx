@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 
 import Reveal from "@/app/components/sections/Reveal";
 import BottomSheet from "@/app/components/BottomSheet";
-import { useMediaQuery } from "@/app/hooks/useMediaQuery";
 import { Project } from "@/app/data/Types";
 
 import { PROJECTS_DATA } from "@/app/data/Data";
@@ -46,6 +45,7 @@ function DesktopModal({ isOpen, onClose, children }: {
   const [isAnimating, setIsAnimating] = useState(false);
 
   // lock body scroll
+  // TODO do it without removing side scroll bar
   useEffect(() => {
     if (!isOpen) return;
     document.body.style.overflow = "hidden";
@@ -119,7 +119,7 @@ function ProjectCard({ project, onClick }: Readonly<{
         className={`
           border border-foreground/20 rounded-xl p-6
           transition duration-300
-          ${!project.status && "cursor-pointer hover:scale-[100.5%] hover:-translate-y-1 hover:shadow-xl"}
+          ${!project.status ? "cursor-pointer hover:scale-[100.5%] hover:-translate-y-1 hover:shadow-xl" : "cursor-not-allowed"}
         `}
         onClick={!project.status ? onClick : () => {return}}
       >
