@@ -421,7 +421,7 @@ export const PROJECTS_DATA = [
   {
     title: "Calendar/Timetable optimization WebTool",
     description: "Visualize event overlaps and find optimal combinations based on several user preferences.",
-    stats: ["Next.js", "React", "SQLite", "API", "NP Optimization"],
+    stats: ["Next.js", "React", "PostgreSQL", "API", "NP Optimization"],
     status: "In Dev",
     blog: (
       <div className="space-y-8">
