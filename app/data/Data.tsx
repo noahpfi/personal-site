@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import AudioPreview from "@/app/components/AudioPreview";
-import ImagePreview from "@/app/components/ImagePreview";
+// import ImagePreview from "@/app/components/ImagePreview";
 
 import projects_dipl_home from "@/public/projects/Home.jpg";
 import projects_dipl_program from "@/public/projects/Program.jpg";
