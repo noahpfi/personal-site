@@ -56,6 +56,7 @@ function DesktopModal({ isOpen, onClose, children }: {
   // lock body scroll without layout shift due to scrollbar
   useEffect(() => {
     if (!isOpen) return;
+    if (window.innerWidth < 768) return;  // only pad on desktop
     
     // get scrollbar width from CSS variable
     const scrollbarWidth = getComputedStyle(document.documentElement).getPropertyValue('--scrollbar-width');
