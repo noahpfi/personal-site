@@ -145,6 +145,7 @@ export default function BottomSheet({ isOpen, onClose, children, snapPoints = [7
           rounded-t-2xl overflow-hidden
           transition-[height] ease-out
           ${isDragging ? 'duration-0' : 'duration-300'}
+          touch-none
         `}
       >
         <div className="flex-shrink-0 relative top-0 left-0 w-full h-4 flex items-center justify-center touch-none border-b border-foreground/20">

@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --scrollbar-width: 12px;
 }
 
 @theme inline {
@@ -76,8 +77,8 @@ body {
 }
 
 *::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
+  width: var(--scrollbar-width);
+  height: var(--scrollbar-width);
 }
 
 *::-webkit-scrollbar-track {

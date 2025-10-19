@@ -53,12 +53,21 @@ function DesktopModal({ isOpen, onClose, children }: {
   const [isMounted, setIsMounted] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  // lock body scroll
-  // TODO do it without removing side scroll bar
+  // lock body scroll without layout shift due to scrollbar
   useEffect(() => {
     if (!isOpen) return;
+    
+    // get scrollbar width from CSS variable
+    const scrollbarWidth = getComputedStyle(document.documentElement).getPropertyValue('--scrollbar-width');
+    
     document.body.style.overflow = "hidden";
-    return () => {document.body.style.overflow = ""};
+    // add padding to compensate for scrollbar width
+    document.body.style.paddingRight = scrollbarWidth;
+    
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+    };
   }, [isOpen]);
 
   useEffect(() => {
