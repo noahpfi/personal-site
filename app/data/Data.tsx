@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import AudioPreview from "@/app/components/AudioPreview";
+import ImagePreview from "@/app/components/ImagePreview";
 
 import projects_dipl_home from "@/public/projects/Home.jpg";
 import projects_dipl_program from "@/public/projects/Program.jpg";
@@ -20,6 +21,11 @@ import about_love from "@/public/about/love.jpg";
 import about_personalProject from "@/public/about/personal_project.jpg";
 import about_studio from "@/public/about/studio.jpg";
 
+/**
+ * VARIOUS STATIC DATA
+ */
+
+// audio samples for the sample AI project
 const AUDIO_SAMPLES = [
   {
     audioSrc: "/projects/808_1.mp3",
@@ -38,6 +44,7 @@ const AUDIO_SAMPLES = [
   },
 ];
 
+// projects info and blogs
 export const PROJECTS_DATA = [
   {
     title: "This site",
@@ -462,6 +469,7 @@ export const PROJECTS_DATA = [
   }
 ]
 
+// skills section
 export const SKILLS_DATA = {
   Frontend: [
     { 
@@ -556,6 +564,7 @@ export const SKILLS_DATA = {
   ],
 };
 
+// about section
 export const ABOUT_ROLES = [
   'Developer', 'Designer', 'Photographer', 
   'Musician', 'Producer', 'Athlete'

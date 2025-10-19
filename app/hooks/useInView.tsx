@@ -7,6 +7,11 @@ type UseInViewOptions = IntersectionObserverInit & {
   initiallyTrue?: boolean;
 };
 
+/**
+ * Custom hook for checking if an element is in view
+ * @param options - IntersectionObserverInit options + triggerOnce and initiallyTrue options
+ * @returns [ref, isInView] - Ref object and boolean indicating if element is in view
+ */
 export function useInView<T extends HTMLElement>(
   options: UseInViewOptions = {}
 ): [RefObject<T | null>, boolean] {

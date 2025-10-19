@@ -2,6 +2,10 @@ import { RefObject } from "react";
 
 import Reveal from "@/app/components/sections/Reveal";
 
+/**
+ * Hero section component
+ * @param heroRef - Reference for triggering footer reveal
+ */
 export default function Hero({ heroRef }: {
   heroRef: RefObject<HTMLElement | null>;
 }) {
@@ -21,8 +25,10 @@ export default function Hero({ heroRef }: {
   );
 }
 
+// max number of text elements for spinning animation, must match largest --num-elements in globals.css
 const MAX_NUMBER_OF_ELEMENTS = 12;
 
+// spinning text animation
 function SpinningHero() {
   const elements = Array.from({ length: MAX_NUMBER_OF_ELEMENTS });
 

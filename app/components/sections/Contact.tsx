@@ -3,6 +3,9 @@ import { useState } from "react";
 import Reveal from "@/app/components/sections/Reveal";
 import { sendEmail } from "@/app/actions";
 
+/**
+ * Contact section component with email form
+ */
 export default function Contact() {
   return (
     <section id="contact" className="px-6 md:px-12 py-24 bg-foreground/5">
@@ -27,11 +30,15 @@ export default function Contact() {
   );
 }
 
+/**
+ * Contact form component with email submission functionality
+ */
 function ContactForm() {
   const [status, setStatus] = useState("Send >");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
+  // handle form submission and email sending
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStatus('Sending..');

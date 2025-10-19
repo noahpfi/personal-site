@@ -1,3 +1,4 @@
+// project type for projects section components
 export type Project = {
   title: string;
   description?: string;

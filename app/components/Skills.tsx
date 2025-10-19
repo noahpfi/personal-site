@@ -3,9 +3,16 @@ import { useState } from "react";
 import Reveal from "@/app/components/sections/Reveal";
 import { SKILLS_DATA } from "@/app/data/Data";
 
+/**
+ * Skills section component with categorized skills and expandable descriptions
+ */
 export default function Skills() {
   const [openSkill, setOpenSkill] = useState<string | null>(null);
 
+  /**
+   * Toggle skill description visibility
+   * @param skillName - Name of the skill to toggle
+   */
   const handleSkillClick = (skillName: string) => {
     setOpenSkill(openSkill === skillName ? null : skillName);
   };

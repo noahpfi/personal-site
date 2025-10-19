@@ -8,6 +8,11 @@ import { ABOUT_IMAGES } from "@/app/data/Data";
 
 const BASE_HUES = [0, 30, 55, 175, 200, 240];
 
+/**
+ * Generate a randomized color palette for role text styling
+ * @param count - Number of colors to generate
+ * @returns Array of HSL color strings
+ */
 const generateColorPalette = (count: number): string[] => {
   const palette: string[] = [];
 
@@ -102,9 +107,16 @@ const ABOUT_DATA = [
   },
 ];
 
+/**
+ * About section component with expandable content sections
+ */
 export default function About() {
   const [openSection, setOpenSection] = useState<string | null>(null);
 
+  /**
+   * Toggle section content visibility
+   * @param sectionTrigger - Trigger text for the section to toggle
+   */
   const handleSectionClick = (sectionTrigger: string) => {
     setOpenSection(openSection === sectionTrigger ? null : sectionTrigger);
   };

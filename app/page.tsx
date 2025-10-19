@@ -11,6 +11,7 @@ import About from "@/app/components/sections/About";
 import Footer from "@/app/components/sections/Footer";
 
 export default function Home() {
+  // check if hero section is in view to trigger footer reveal
   const [heroInViewRef, heroInView] = useInView<HTMLElement>({ threshold: 0.4, initiallyTrue: true });
 
   return (

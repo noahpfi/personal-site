@@ -1,5 +1,9 @@
 import Link from "next/link";
 
+/**
+ * Footer component with navigation links
+ * @param showFooter - Whether to make footer visible
+ */
 export default function Footer({ showFooter }: Readonly<{
   showFooter: boolean;
 }>) {

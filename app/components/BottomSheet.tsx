@@ -1,5 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 
+/**
+ * Bottom sheet modal component with snapping functionality
+ * @param isOpen - Whether the bottom sheet is currently open
+ * @param onClose - Callback function to close the bottom sheet
+ * @param children - Content to display inside the bottom sheet
+ * @param snapPoints - Array of height percentages to snap to from bottom (default: [75, 100, 0])
+ */
 export default function BottomSheet({ isOpen, onClose, children, snapPoints = [75, 100, 0] }: {
   isOpen: boolean;
   onClose: () => void;
@@ -17,7 +24,7 @@ export default function BottomSheet({ isOpen, onClose, children, snapPoints = [7
   const dragStartRef = useRef({ y: 0, modalHeight: 0, startY: 0 });
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // lock body scroll
+  // prevent body scroll when open
   useEffect(() => {
     if (!isOpen) return;
     document.body.style.overflow = "hidden";
@@ -37,7 +44,7 @@ export default function BottomSheet({ isOpen, onClose, children, snapPoints = [7
     }
   }, [isOpen]);
 
-  // unmount the component after animation
+  // unmount the component after close animation
   const onTransitionEnd = () => {
     if (!isOpen) {
       setIsMounted(false);

@@ -21,6 +21,12 @@ type AudioPreviewProps = {
   alt: string;
 };
 
+/**
+ * Audio preview component with waveform visualization and playback controls
+ * @param audioSrc - URL to audio file
+ * @param waveformSrc - Static image data for waveform visualization
+ * @param alt - Alt text for waveform image
+ */
 export default function AudioPreview({ audioSrc, waveformSrc, alt }: AudioPreviewProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);

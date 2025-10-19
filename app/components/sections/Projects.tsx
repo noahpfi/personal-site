@@ -6,6 +6,9 @@ import { Project } from "@/app/data/Types";
 
 import { PROJECTS_DATA } from "@/app/data/Data";
 
+/**
+ * Projects section component with project cards and details in modals
+ */
 export default function Projects() {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
 
@@ -36,6 +39,12 @@ export default function Projects() {
   );
 }
 
+/**
+ * Desktop modal component for project details
+ * @param isOpen - Whether the modal is open
+ * @param onClose - Function to close the modal
+ * @param children - Content to display in the modal
+ */
 function DesktopModal({ isOpen, onClose, children }: {
   isOpen: boolean;
   onClose: () => void;
@@ -109,6 +118,11 @@ function DesktopModal({ isOpen, onClose, children }: {
   );
 }
 
+/**
+ * Project card component
+ * @param project - Project data
+ * @param onClick - Function handling card click
+ */
 function ProjectCard({ project, onClick }: Readonly<{
   project: Project;
   onClick: () => void;
