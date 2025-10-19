@@ -204,21 +204,21 @@ export const PROJECTS_DATA = [
             <Image
               src={projects_dipl_home}
               alt="Homescreen"
-              className="dark:hidden object-contain"
+              className="object-contain"
             />
           </div>
           <div className="bg-muted rounded-md aspect-video flex items-center justify-center text-muted-foreground">
             <Image
               src={projects_dipl_program}
               alt="Running program"
-              className="dark:hidden object-contain"
+              className="object-contain"
             />
           </div>
           <div className="bg-muted rounded-md aspect-video flex items-center justify-center text-muted-foreground">
             <Image
               src={projects_dipl_debug}
               alt="Debug view"
-              className="dark:hidden object-contain"
+              className="object-contain"
             />
           </div>
         </div>
