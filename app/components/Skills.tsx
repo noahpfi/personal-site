@@ -22,7 +22,7 @@ export default function Skills() {
       <h2 className="text-3xl md:text-4xl font-bold mb-8">Skills</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
         {Object.entries(SKILLS_DATA).map(([category, skills]) => (
-          <div key={category}>
+          <div data-morph-target key={category}>
             <h3 className="text-xl font-semibold mb-4">{category}</h3>
             <ul className="space-y-2 text-muted-foreground">
               {skills.map((skill, i) => {
