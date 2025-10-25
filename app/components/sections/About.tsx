@@ -68,18 +68,18 @@ const ABOUT_DATA = [
         <p>
           My technical school background taught me the logic of
           <span className="italic"> 'how' </span>
-          — how gears turn, how circuits connect. Computer science was the natural next step, translating that 'how' into the digital realm. But I’m the kind of person who gets restless with just knowing how.
+          — how gears turn, how circuits connect. That entire time I was equally/if not more interested in software, which led me to learn multiple languages (Java, C, C++, Python, JS/TS, ..) via small projects next to that - Computer science was the natural next step, making the full transition into the digital realm. But I’m also the kind of person who gets restless with just knowing how.
         </p>
-        <p>It led to a pretty stupid realization: the most brilliant engineering is a complete waste of time if it's solving the wrong problem.</p>
+        <p>This led to a realization that the most brilliant engineering is a complete waste of time if it's solving the wrong problem.</p>
         <p>
           That's what pulled me towards the question of
-          <span className="italic"> 'why' </span>
-          . Why this product? Why would anyone care? That's why I'm now pairing my technical skills with business and economics.
+          <span className="italic"> 'why'</span>
+          . Why this product? Why would anyone care? I'm now pairing my technical skills with business and economics.
           My goal is to answer the
           <span className="italic"> why </span>
           before we get lost in the
-          <span className="italic"> how </span>
-          , so I can actually use my technical skills to help build the right things.
+          <span className="italic"> how</span>
+          , and then use my technical skills to help build the right things.
         </p>
         {/* <p>- NP</p> */}
       </div>
@@ -124,7 +124,7 @@ export default function About() {
   return (
     <section id="about" className="px-6 md:px-12 py-24">
       <h2 className="text-3xl md:text-4xl font-bold mb-8">About Me</h2>
-      <div className="space-y-4">
+      <div data-morph-target className="space-y-4">
         {ABOUT_DATA.map((item, i) => {
           const isOpen = openSection === item.trigger;
           return (
