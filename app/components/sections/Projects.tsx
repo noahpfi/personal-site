@@ -97,7 +97,7 @@ function DesktopModal({ isOpen, onClose, children }: {
       onClick={onClose}
       onTransitionEnd={onTransitionEnd}
       className={`
-        fixed inset-0 z-10 bg-black/30 
+        fixed inset-0 z-20 bg-black/30 
         flex flex-col
         justify-center items-center
         touch-none
@@ -139,7 +139,7 @@ function ProjectCard({ project, onClick }: Readonly<{
 }>) { 
   return (
     <>
-      <div 
+      <div data-morph-target={!project.status ? "" : null}
         className={`
           border border-foreground/20 rounded-xl p-6
           transition duration-300

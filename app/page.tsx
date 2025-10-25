@@ -9,6 +9,7 @@ import Skills from "@/app/components/Skills";
 import Contact from "@/app/components/sections/Contact";
 import About from "@/app/components/sections/About";
 import Footer from "@/app/components/sections/Footer";
+import AnimationOverlay from "@/app/components/AnimationOverlay";
 
 export default function Home() {
   // check if hero section is in view to trigger footer reveal
@@ -16,6 +17,9 @@ export default function Home() {
 
   return (
     <div className="bg-background p-2 md:p-6">
+      <div className="hidden md:block">
+        <AnimationOverlay/>
+      </div>
       <div className="border-2 border-foreground rounded-2xl overflow-clip">
         <main>
           <Hero heroRef={heroInViewRef}/>

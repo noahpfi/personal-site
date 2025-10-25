@@ -120,7 +120,7 @@ export default function BottomSheet({ isOpen, onClose, children, snapPoints = [7
     <div
       onTransitionEnd={onTransitionEnd}
       className={`
-        fixed inset-0 z-10 bg-black/30 
+        fixed inset-0 z-20 bg-black/30 
         flex flex-col
         touch-none
         transition-opacity duration-300

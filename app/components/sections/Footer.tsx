@@ -8,7 +8,7 @@ export default function Footer({ showFooter }: Readonly<{
   showFooter: boolean;
 }>) {
   return (
-    <footer className="sticky bottom-0">
+    <footer className="sticky bottom-0 z-10">
       <div className={`
         border-t-2 border-foreground glass-effect
         transition-opacity duration-300
